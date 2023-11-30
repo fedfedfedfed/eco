@@ -74,7 +74,7 @@ const VideoTutorialCrud = () => {
       };
 
       await axios.put(
-        `http://localhost:8080/api/video-tutorial/${selectedVideo.id}`,
+        `http://localhost:8080/api/video-tutorials/${selectedVideo.id}`,
         updatedVideo
       );
 

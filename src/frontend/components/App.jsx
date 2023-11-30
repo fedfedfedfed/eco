@@ -6,6 +6,9 @@ import PopUp from './PopUp/PopUp';
 import HeroSection from './HeroSection/HeroSection';
 import Recipes from './Recipes/Recipes';
 import RecipeCrud from './RecipeCrud/RecipeCrud';
+import EventCrud from './EventCrud/EventCrud';
+import AddEvent from './EventCrud/AddEvent';
+import UpdateEvent from './EventCrud/UpdateEvent';
 import VideoTutorialAdd from './VideoTutorialCrud/VideoTutorialAdd';
 import VideoTutorialCrud from './VideoTutorialCrud/VideoTutorialCrud';
 import VideoTutorialUpdate from './VideoTutorialCrud/VideoTutorialUpdate';
@@ -38,6 +41,9 @@ function App() {
           <Route path="/manage-video-tutorials" element={<VideoTutorialCrud />} />
           <Route path="/manage-video-tutorials/add-video-tutorials" element={<VideoTutorialAdd />} />
           <Route path="/manage-tutorials/update-video-tutorials/:video-tutorialId" element={<VideoTutorialUpdate />} />
+          <Route path="/manage-events" element={<EventCrud />} />
+          <Route path="/manage-events/add-event" element={<AddEvent />} />
+          <Route path="/manage-events/update-events/:eventId" element={<UpdateEvent />} />
           
           {/* Додайте маршрут для LoginPage */}
           <Route path="/login" element={<LoginPage />} />
