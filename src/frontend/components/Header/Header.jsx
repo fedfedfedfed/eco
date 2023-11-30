@@ -31,6 +31,9 @@ const Header = () => {
         <li className="nav-item">
           <a href="/register" className="nav-link">Register</a>
         </li>
+        <li className="nav-item">
+          <a href="/manage-video-tutorials" className="nav-link">Video Tutorials</a>
+        </li>
       </ul>
     </nav>
 

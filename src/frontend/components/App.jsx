@@ -6,6 +6,9 @@ import PopUp from './PopUp/PopUp';
 import HeroSection from './HeroSection/HeroSection';
 import Recipes from './Recipes/Recipes';
 import RecipeCrud from './RecipeCrud/RecipeCrud';
+import VideoTutorialAdd from './VideoTutorialCrud/VideoTutorialAdd';
+import VideoTutorialCrud from './VideoTutorialCrud/VideoTutorialCrud';
+import VideoTutorialUpdate from './VideoTutorialCrud/VideoTutorialUpdate';
 import ChefCrud from './ChefCrud/ChefCrud';
 import './modern-normalize.css';
 import HomePage from '../pages/HomePage';
@@ -32,6 +35,9 @@ function App() {
           <Route path="/manage-recipes" element={<RecipeCrud />} />
           <Route path="/manage-recipes/add-recipe" element={<AddRecipe />} />
           <Route path="/manage-recipes/update-recipe/:recipeId" element={<UpdateRecipe />} />
+          <Route path="/manage-video-tutorials" element={<VideoTutorialCrud />} />
+          <Route path="/manage-video-tutorials/add-video-tutorials" element={<VideoTutorialAdd />} />
+          <Route path="/manage-tutorials/update-video-tutorials/:video-tutorialId" element={<VideoTutorialUpdate />} />
           
           {/* Додайте маршрут для LoginPage */}
           <Route path="/login" element={<LoginPage />} />

@@ -2,36 +2,8 @@
 /* Import this line in your stylesheet */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-.form-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
-  }
-  .chef_title {
-    padding: 10px 0;
-  }
-  .recipe-title {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-  .chef-info div {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  .chef_exp {
-    text-align: right;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  .chef_email {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
+
+  
 .modal {
   visibility: hidden;
   opacity: 0;
