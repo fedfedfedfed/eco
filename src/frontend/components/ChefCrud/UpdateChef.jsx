@@ -8,18 +8,19 @@ const UpdateChef = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        phone_number: '',
+        phoneNumber: '',
         experience: 0,
         biography: '',
+        imageUrl: '',
     });
 
     useEffect(() => {
         const fetchChef = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/chef/${chefId}`);
+                const response = await axios.get(`http://localhost:8080/api/chefs/${chefId}`);
                 setFormData(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -36,42 +37,39 @@ const UpdateChef = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        try {
-            const updatedChef = {
-                ...formData,
-            };
-            await axios.put(`http://localhost:8080/api/chefs/${chefId}`, updatedChef);
-            console.log(updatedChef);
-            navigate('/manage-chefs');
-        } catch (error) {
-            console.error('Помилка при оновленні кухаря:', error);
-        }
+      try {
+        const response = await axios.put(`http://localhost:8080/api/chefs`, formData);
+        console.log(response.data);
+        navigate('/manage-chefs'); // Redirect to the recipes page after updating a recipe
+      } catch (error) {
+        console.error('Error updating chef:', error);
+      }
     };
     
     return (
-        <div className="update-chef-container">
+        <div className="recipe-chef-container">
             <Header />
-            <h2 className='chefs-title'>Update Chef</h2>
-            <form className="chef-form" onSubmit={handleUpdate}>
+            <h2 className='recipe-title'>Update Chef</h2>
+            <form className="recipe-form" onSubmit={handleUpdate}>
                 <div className="form-group">
-                    <label htmlFor="first_name">First Name:</label>
+                    <label htmlFor="firstName">First Name:</label>
                     <input
                         type="text"
-                        id="first_name"
-                        name="first_name"
-                        value={formData.first_name}
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleInputChange}
                         required
                     />
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="last_name">Last Name:</label>
+                    <label htmlFor="lastName">Last Name:</label>
                     <input
                         type="text"
-                        id="last_name"
-                        name="last_name"
-                        value={formData.last_name}
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
                         onChange={handleInputChange}
                         required
                     />
@@ -90,12 +88,12 @@ const UpdateChef = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="phone_number">Phone Number:</label>
+                    <label htmlFor="phoneNumber">Phone Number:</label>
                     <input
                         type="text"
-                        id="phone_number"
-                        name="phone_number"
-                        value={formData.phone_number}
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
                         onChange={handleInputChange}
                         required
                     />
@@ -120,6 +118,17 @@ const UpdateChef = () => {
                         id="biography"
                         name="biography"
                         value={formData.biography}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="imageUrl">Image:</label>
+                    <textarea
+                        id="imageUrl"
+                        name="imageUrl"
+                        value={formData.imageUrl}
                         onChange={handleInputChange}
                         required
                     />

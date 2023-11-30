@@ -8,12 +8,13 @@ const AddChef = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone_number: '',
+    phoneNumber: '',
     experience: 0,
     biography: '',
+    imageUrl: '',
   });
 
   const handleInputChange = (e) => {
@@ -39,24 +40,36 @@ const AddChef = () => {
         <div className="form-container">
           <form className="recipe-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="first_name">First Name:</label>
+              <label htmlFor="firstName">First Name:</label>
               <input
                 type="text"
-                id="first_name"
-                name="first_name"
-                value={formData.first_name}
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
                 onChange={handleInputChange}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label htmlFor="last_name">Last Name:</label>
+              <label htmlFor="lastName">Last Name:</label>
               <input
                 type="text"
-                id="last_name"
-                name="last_name"
-                value={formData.last_name}
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="imageUrl">Image:</label>
+              <input
+                type="text"
+                id="imageUrl"
+                name="imageUrl"
+                value={formData.imageUrl}
                 onChange={handleInputChange}
                 required
               />
@@ -75,12 +88,12 @@ const AddChef = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone_number">Phone Number:</label>
+              <label htmlFor="phoneNumber">Phone Number:</label>
               <input
                 type="text"
-                id="phone_number"
-                name="phone_number"
-                value={formData.phone_number}
+                id="phoneNumber"
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleInputChange}
                 required
               />

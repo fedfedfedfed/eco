@@ -10,7 +10,26 @@
     background-color: #fff;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
   }
-  
+  .chef_title {
+    padding: 10px 0;
+  }
+  .chef-info div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .chef_exp {
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .chef_email {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
 .modal {
   visibility: hidden;
   opacity: 0;

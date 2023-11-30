@@ -13,6 +13,7 @@ const ChefCrud = () => {
     phone_number: '',
     experience: 0,
     biography: '',
+    image_url: '',
   });
   const [selectedChef, setSelectedChef] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,7 +28,6 @@ const ChefCrud = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/chefs');
       setChefs(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching chefs:', error);
     }
@@ -50,6 +50,7 @@ const ChefCrud = () => {
         phone_number: '',
         experience: 0,
         biography: '',
+        image_url: '',
       });
     } catch (error) {
       console.error('Error creating chef:', error);
@@ -109,6 +110,7 @@ const ChefCrud = () => {
       phone_number: '',
       experience: 0,
       biography: '',
+      image_url: '',
     });
     document.body.classList.remove('modal-open');
   };
@@ -159,45 +161,68 @@ return (
   
         <ul className='recipe_wrapper'>
         {chef.map((chefx) => (
-  <li key={chefx.id} className="recipe-card">
-    <div className="recipe-details">
-      <h3 className="recipe_title">
-        {chefx.first_name} {chefx.last_name}
-      </h3>
-      <p className='recipe-description'>{truncateDescription(chefx.biography)}</p>
-      <a
-        className="see-more"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSeeMore(chefx);
-        }}
-        href={`#chef-modal-${chefx.id}`}
-      >
-        See chef
-      </a>
-    </div>
-  </li>
+          <li key={chefx.id} className="recipe-card">
+            <div className="recipe-details">
+            <img src={chefx.imageUrl} alt={chefx.title} className="recipe-image" />
+              <h3 className="recipe_title">
+                {chefx.firstName} {chefx.lastName}
+              </h3>
+              <p className='chef_email'><i className="far fa-envelope"></i> <span>{chefx.email}</span></p>
+              <p className='recipe-description'>{truncateDescription(chefx.biography)}</p>
+              <a
+                className="see-more"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSeeMore(chefx);
+                }}
+                href={`#chef-modal-${chefx.id}`}
+              >
+                Explore More
+              </a>
+            </div>
+          </li>
           ))}
         </ul>
   
         {selectedChef && (
-          <div id={`chef-modal-${selectedChef.id}`} className="modal">
-            <div className="modal__content">
-              {/* Ваша інформація для відображення шеф-кухаря */}
-              <button className="modal__close" onClick={closeModal}>
-                &#10006;
-              </button>
-              <div className="crud_btns">
-                <button type="button" className='update-btn' onClick={handleUpdate}>
-                  Update
-                </button>
-                <button type="button" className='delete-btn' onClick={() => handleDelete(selectedChef.id)}>
-                  Delete
-                </button>
-              </div>
-            </div>
+  <div id={`chef-modal-${selectedChef.id}`} className="modal">
+    <div className="modal__content">
+      <button className="modal__close" onClick={closeModal}>
+        &#10006;
+      </button>
+      <div className="chef-details">
+        <h2 className='modal_title'>{selectedChef.firstName} {selectedChef.lastName}</h2>
+        <img
+          src={selectedChef.imageUrl}
+          alt={`${selectedChef.firstName} ${selectedChef.lastName}`}
+          className="modal-image"
+        />
+
+        <div className='chef-info'>
+          <div>
+          <p><i className="far fa-envelope"></i> {selectedChef.email}</p>
+          <p><i className="fas fa-phone"></i> {selectedChef.phoneNumber}</p>
           </div>
-        )}
+          <p>{selectedChef.biography}</p>
+          <p className='chef_exp'><i className="fas fa-clock"></i> {selectedChef.experience} years</p>
+          </div>
+
+        <div className="crud_btns">
+          <Link to={`/manage-chefs/update-chefs/${selectedChef.id}`} className="update">
+              <button type="button" className='update-btn' onClick={handleUpdate}>
+                Update
+              </button>
+            </Link>
+
+          <button type="button" className='delete-btn' onClick={() => handleDelete(selectedChef.id)}>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );
