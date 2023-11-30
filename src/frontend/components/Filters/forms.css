@@ -1,0 +1,136 @@
+:root {
+    --colorPrimary: #9bb537;
+    --ss-bg-color: #ffffff;
+    --ss-font-color: #4d4d4d;
+    --ss-font-placeholder-color: #8d8d8d;
+    --ss-disabled-color: #dcdee2;
+    --ss-border-color: #dcdee2;
+    --ss-highlight-color: #fffb8c;
+    --ss-success-color: #00b755;
+    --ss-error-color: #dc3545;
+    --ss-main-height: 30px;
+    --ss-content-height: 300px;
+    --ss-spacing-l: 7px;
+    --ss-spacing-m: 5px;
+    --ss-spacing-s: 3px;
+    --ss-animation-timing: 0.2s;
+    --ss-border-radius: 4px;
+}
+:root {
+    /* 
+  ================
+  COLORS 
+  ================
+  */
+    --white: #ffffff;
+    --black: #000000;
+
+    --colorPrimary: #9bb537;
+
+    --light: #f8f8f8;
+    --dark: #1e1e1e;
+    --orange: #eea10c;
+
+    --colorTextDark: #050505;
+    --colorTextGray: rgba(5, 5, 5, 0.5);
+    --colorBorder: rgba(5, 5, 5, 0.2);
+
+    /* 
+  ==============
+  FONTS
+  ==============
+  */
+    --font-primary: Inter, sans-serif;
+
+    /*
+  ===========
+  OTHER
+  ===========
+  */
+
+    --cubic-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.28;
+    color: rgba(5, 5, 5, 0.5);
+    margin-bottom: 8px;
+}
+
+input,
+.filters .filter-select {
+    padding: 14px 18px;
+    border-radius: 15px;
+    border: 1px solid rgba(5, 5, 5, 0.2);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(5, 5, 5, 0.5);
+}
+
+input {
+    color: var(--colorTextDark);
+}
+
+input::placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(5, 5, 5, 0.5);
+}
+
+textarea {
+    color: var(--colorTextDark);
+    padding: 14px 18px;
+}
+
+textarea::placeholder {
+    padding: 14px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(5, 5, 5, 0.5);
+}
+
+.ss-content .ss-list .ss-option.filter-select-option {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(5, 5, 5, 0.5);
+    background: var(--white);
+    padding: 8px 18px;
+}
+
+.filter-select-option.ss-selected {
+    background-color: transparent !important;
+    color: var(--colorTextDark) !important;
+}
+
+.ss-content .ss-list .ss-option:hover,
+.ss-content .ss-list .ss-option:focus {
+    background-color: transparent !important;
+    color: var(--colorTextDark) !important;
+}
+
+.ss-main .ss-arrow {
+    opacity: 0.7;
+}
+
+.filter-select.ss-open-below {
+    border-radius: 15px !important;
+    border: 1px solid rgba(5, 5, 5, 0.2);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.ss-main:focus {
+box-shadow: 0 0 5px var(--colorPrimary) !important;
+}
