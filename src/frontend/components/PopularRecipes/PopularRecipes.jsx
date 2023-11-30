@@ -3,69 +3,40 @@ import './popularrecipes.css';
 const PopularCategories = () => {
   return (
     <div className="popular-categories">
-      <h2 className="popular-recipes">Popular recipes</h2>
+      <h2 className="popular-recipes">Interesting facts</h2>
       <ul className="popular-list">
         <li className="popular-recipes-list">
-          <img
-            className="img-popular"
-            src="./img/popular recipes/french_omlet.jpg"
-            alt=""
-            width="64px"
-            height="64px"
-          />
           <div className="popular-card">
-            <h3 className="popular-title">Chocolate Gateau</h3>
+            <h3 className="popular-title">Maillard Reaction:</h3>
             <p className="popular-text">
-              A French dessert consisting of layers of chocolate sponge cake and
-              chocolate ganache, typically topped with chocolate glaze and chocolate
-              decorations.
+            The Maillard reaction is a complex chemical reaction that occurs between amino acids and reducing sugars when heat is applied. This reaction is responsible for the browning of food and the development of complex flavors and aromas. It's the reason why grilled meat, baked bread, and roasted coffee beans have such rich and appealing flavors.
             </p>
           </div>
         </li>
 
         <li className="popular-recipes-list">
-          <img
-            className="img-popular"
-            src="./img/popular recipes/squash_linguine.jpg"
-            alt=""
-          />
           <div className="popular-card">
-            <h3 className="popular-title">Irish stew</h3>
+            <h3 className="popular-title">Umami - The Fifth Taste:</h3>
             <p className="popular-text">
-              A traditional Irish dish made with lamb, potatoes, carrots, onions,
-              and herbs, cooked in a broth or gravy.
+            Umami is often considered the fifth taste, alongside sweet, salty, sour, and bitter. Discovered by Japanese chemist Kikunae Ikeda, umami is described as a savory or meaty taste. Foods rich in umami include tomatoes, Parmesan cheese, soy sauce, and mushrooms. Understanding and balancing umami can enhance the overall flavor profile of a dish.
             </p>
           </div>
         </li>
 
         <li className="popular-recipes-list">
-          <img
-            className="img-popular"
-            src="./img/popular recipes/sugar_pie.jpg"
-            alt=""
-          />
           <div className="popular-card">
-            <h3 className="popular-title">Mediterranean Pasta Salad</h3>
+            <h3 className="popular-title">Historical Evolution of Spices:</h3>
             <p className="popular-text">
-              A salad made with pasta, vegetables (such as tomatoes, cucumbers, and
-              olives), feta cheese, and a dressing made with olive oil and lemon
-              juice.
+            Spices have played a crucial role in the history of cooking. During the Middle Ages, spices such as pepper, cinnamon, and cloves were highly prized and considered a symbol of wealth. They were used not only to flavor food but also to preserve it. The spice trade routes were a major driver of exploration and global trade.
             </p>
           </div>
         </li>
 
         <li className="popular-recipes-list">
-          <img
-            className="img-popular"
-            src="./img/popular recipes/baked_salmon.jpg"
-            alt=""
-          />
           <div className="popular-card">
-            <h3 className="popular-title">Burek</h3>
+            <h3 className="popular-title">Molecular Gastronomy:</h3>
             <p className="popular-text">
-              Burek is a traditional Balkan pastry made with phyllo dough and a
-              savory filling, usually of meat, cheese, or vegetables. It's a popular
-              street food in the region and can be enjoyed as a snack or a meal.
+            Molecular gastronomy is a scientific approach to cooking that explores the physical and chemical transformations that occur during food preparation. Chefs practicing molecular gastronomy often use techniques such as spherification, foaming, and liquid nitrogen to create innovative and visually stunning dishes. Ferran Adrià of elBulli in Spain is considered one of the pioneers of this culinary movement.
             </p>
           </div>
         </li>

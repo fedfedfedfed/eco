@@ -1,0 +1,40 @@
+/* Загальні стилі для Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8; /* Світлий фон для світлої теми */
+    color: #333; /* Темний колір тексту для світлої теми */
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Стилі для світлої теми */
+  .header.light {
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  /* Стилі для темної теми */
+  .header.dark {
+    background-color: #333;
+    color: #f8f8f8;
+  }
+  
+  /* Стилі для кнопки перемикання теми */
+  button[aria-label="switch theme"] {
+    background-color: #fff; /* Світлий фон для кнопки */
+    color: #333; /* Темний колір тексту для світлої теми */
+    border: 1px solid #ccc; /* Темний колір рамки для світлої теми */
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  
+  /* Стилі для темної теми кнопки */
+  .button.dark[aria-label="switch theme"] {
+    background-color: #333;
+    color: #f8f8f8;
+    border-color: #666;
+  }
+  

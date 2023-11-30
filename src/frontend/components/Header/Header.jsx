@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './header.css';
 import './forms.css';
-
+import { toggleTheme } from '../../redux/themeReducer';
 
 const Header = () => {
   return (
@@ -20,7 +20,16 @@ const Header = () => {
           <a href="./favorites.html" className="nav-link">Favorites</a>
         </li>
         <li className="nav-item">
+          <a href="/manage-chefs" className="nav-link">Chef</a>
+        </li>
+        <li className="nav-item">
           <a href="/manage-recipes" className="nav-link">Admin</a>
+        </li>
+        <li className="nav-item">
+          <a href="/login" className="nav-link">Login</a>
+        </li>
+        <li className="nav-item">
+          <a href="/register" className="nav-link">Register</a>
         </li>
       </ul>
     </nav>
@@ -42,16 +51,6 @@ const Header = () => {
             <use href="./img/sprite.svg#basket"></use>
           </svg>
         </a>
-      </li>
-      <li>
-        <button type="button" aria-label="switch theme">
-          <img
-            className="icon-switch"
-            width="46px"
-            height="20px"
-            src="./img/switch.png"
-          />
-        </button>
       </li>
     </ul>
   </div>
@@ -112,9 +111,6 @@ const Header = () => {
     </div>
   </div>
 </header>}
-        <button type="button" aria-label="switch theme">
-          <img className="icon-switch" width="46px" height="20px" src="./img/switch.png" />
-        </button>
       </div>
     </header>
   );
