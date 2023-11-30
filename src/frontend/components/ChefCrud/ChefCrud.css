@@ -13,13 +13,11 @@
   .chef_title {
     padding: 10px 0;
   }
-<<<<<<< HEAD
   .recipe-title {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
   }
-=======
->>>>>>> a195f5024f94c1365c3de5b83918d0435cac2ca6
+
   .chef-info div {
     display: flex;
     justify-content: space-between;
@@ -31,11 +29,9 @@
     padding-bottom: 5px;
   }
   .chef_email {
-<<<<<<< HEAD
-=======
+
     padding-left: 1em;
     padding-bottom: 1em;
->>>>>>> a195f5024f94c1365c3de5b83918d0435cac2ca6
     display: flex;
     align-items: center;
     gap: 7px;
