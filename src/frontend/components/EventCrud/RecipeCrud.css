@@ -525,3 +525,12 @@ select {
 .cancel-btn:hover {
   background-color: #c0392b; /* Darker red on hover */
 }
+.event_icons_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.event_description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

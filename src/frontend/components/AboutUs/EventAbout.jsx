@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './RecipeCrud.css';
 import Header from '../Header/Header';
 
 const EventCrud = () => {
@@ -147,9 +146,7 @@ const EventCrud = () => {
           <div>
             <h1 className='recipe-title'>Events</h1>
           </div>
-          <Link to="/manage-events/add-event" className="add">
-            <span>+</span>
-          </Link>
+        
 
           <div id="recipe-modal" className="modal-window">
             <div>
@@ -209,18 +206,6 @@ const EventCrud = () => {
             <button className="modal__close" onClick={closeModal}>
               &#10006;
             </button>
-            <div className="crud_btns">
-            <Link to={`/manage-events/update-events/${selectedEvent.id}`} className="update">
-              <button type="button" className='update-btn' onClick={handleUpdate}>
-                Update
-              </button>
-            </Link>
-
-              
-              <button type="button" className='delete-btn' onClick={() => handleDelete(selectedEvent.id)}>
-                Delete
-              </button>
-            </div>
           </div>
         </div>
       )}

@@ -6,6 +6,7 @@ import PopUp from './PopUp/PopUp';
 import HeroSection from './HeroSection/HeroSection';
 import Recipes from './Recipes/Recipes';
 import RecipeCrud from './RecipeCrud/RecipeCrud';
+import AboutUs from './AboutUs/AboutUs';
 import EventCrud from './EventCrud/EventCrud';
 import AddEvent from './EventCrud/AddEvent';
 import UpdateEvent from './EventCrud/UpdateEvent';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/manage-events" element={<EventCrud />} />
           <Route path="/manage-events/add-event" element={<AddEvent />} />
           <Route path="/manage-events/update-events/:eventId" element={<UpdateEvent />} />
+          <Route path="/aboutus" element={<AboutUs />} />
           
           {/* Додайте маршрут для LoginPage */}
           <Route path="/login" element={<LoginPage />} />

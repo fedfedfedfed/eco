@@ -1,0 +1,118 @@
+
+
+:root {
+    --swiper-pagination-color: #9bb537;
+    --swiper-preloader-color: #000;
+    --swiper-pagination-bottom: -6px;
+  }
+.about_text{
+    text-align: center;
+}
+.ourspan {
+    color:#9bb537;
+}
+.aboutp{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+}
+ .about_h {
+    text-align: center;
+    margin-bottom: 14px;
+    color: var(--colorTextDark);
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2; /* 31.2px */
+    text-transform: uppercase;
+  }
+.span {
+    font-weight: bold;
+    color: var(--colorPrimary);
+    font-style: italic;
+  }
+  
+  .hero-title-text {
+    color: var(--colorTextDark);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  
+ 
+  /* tablet break-point*/
+  @media only screen and (min-width: 768px) {
+    .hero-title {
+      max-width: 446px;
+    }
+    .about_h {
+      font-size: 36px;
+    }
+    .hero-title-text {
+      width: 408px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .hero-btn-order {
+      margin-top: 32px;
+      margin-bottom: 64px;
+    }
+    .hero-card {
+      /*height: 442px;*/
+      /*margin-right: -32px;*/
+      width: calc(100% + 32px);
+    }
+  
+    .swiper-item {
+      height: 442px;
+    }
+    .chief {
+      width: 137px;
+      min-width: 137px;
+    }
+  
+    .dish {
+      width: 351px;
+      min-width: 351px;
+      background-size: 351px 442px;
+    }
+  
+    .dish-photo {
+      padding-right: 44px;
+      padding-left: 44px;
+      margin-bottom: 32px;
+    }
+    .dish-name {
+      width: auto;
+      font-size: 14px;
+    }
+    .dish-area {
+      width: 48px;
+      font-size: 12px;
+      margin-bottom: 32px;
+    }
+    .cuisine-preview {
+      width: 351px;
+      min-width: 351px;
+    }
+  }
+  
+  /* desktop break-point*/
+  @media only screen and (min-width: 1200px) {
+    .hero {
+      padding-top: 57px;
+    }
+  
+    .hero-title {
+      padding-top: 66px;
+    }
+  
+    .hero-container {
+      display: flex;
+      column-gap: 32px;
+    }
+  }
