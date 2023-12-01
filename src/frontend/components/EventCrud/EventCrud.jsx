@@ -18,7 +18,6 @@ const EventCrud = () => {
   });
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -27,6 +26,7 @@ const EventCrud = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/events');
       setEvents(response.data);
+
     } catch (error) {
       console.error('Error fetching events:', error);
     }
@@ -116,6 +116,29 @@ const EventCrud = () => {
     document.body.classList.remove('modal-open');
   };
 
+  const processData = (date) => {
+    const rawDate = new Date(date);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      //second: 'numeric',
+      timeZone: 'Europe/Kiev',
+    };
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(rawDate);
+    console.log(formattedDate);
+    return formattedDate;
+  }
+  const truncateDescription = (description) => {
+    const words = description.split(' ');
+  
+    // Take the first two lines (assuming each line has a maximum of 10 words)
+    const truncatedDescription = words.slice(0, 10).join(' ') + "...";
+  
+    return truncatedDescription;
+  };
   return (
     <div className='wrapper'>
       <Header />
@@ -128,33 +151,34 @@ const EventCrud = () => {
             <span>+</span>
           </Link>
 
-          <div id="open-modal" className="modal-window">
+          <div id="recipe-modal" className="modal-window">
             <div>
               <a href="#" title="Close" className="modal-close">&#10006;</a>
-              <form className="event-form" onSubmit={handleSubmit}>
+              <form className="recipe-form" onSubmit={handleSubmit}>
                 {/* Add form fields for Event */}
                 {/* You can use similar structure as in RecipeCrud */}
               </form>
             </div>
           </div>
         </div>
-        <ul className='event_wrapper'>
+        <ul className='recipe_wrapper'>
           {events.map((event) => (
             <li
               key={event.id}
-              className="event-card"
+              className="recipe-card"
             >
-              <div className="event-details">
+              <div className="recipe-details">
                 {/* Display event information */}
-                <h3 className="event_title">{event.eventName}</h3>
-                <p className='event-description'>{event.description}</p>
+                <img src={event.imageUrl} alt={event.eventName} className="recipe-image" />
+                <h3 className="recipe_title">{event.eventName}</h3>
+                <p className='recipe-description'>{truncateDescription(event.description)}</p>
                 <a
                   className="see-more"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleSeeMore(event);
                   }}
-                  href={`#event-modal-${event.id}`}
+                  href={`#recipe-modal-${event.id}`}
                 >
                   See event
                 </a>
@@ -165,25 +189,41 @@ const EventCrud = () => {
 
         {/* Modal for displaying full event information */}
         {selectedEvent && (
-          <div id={`event-modal-${selectedEvent.id}`} className="modal">
-            <div className="modal__content">
-              {/* Display event details in the modal */}
-              <button className="modal__close" onClick={closeModal}>
-                &#10006;
+        <div id={`recipe-modal-${selectedEvent.id}`} className="modal">
+          <div className="modal__content">
+            <h2 className='modal_title'>{selectedEvent.eventName}</h2>
+            <img
+              src={selectedEvent.imageUrl}
+              alt={selectedEvent.eventName}
+              className="modal-image"
+            />
+            <div className='event_icons_wrapper'>
+          <p><i className="fas fa-map-marker-alt"></i> {selectedEvent.location}</p>
+          <p><i className="fa fa-volume-up"></i> {selectedEvent.organizer}</p>
+          </div>
+          <p className='event_description'>{selectedEvent.description}</p>
+          <div className='event_icons_wrapper'>
+          <p className='modal_cook_time'><i className="far fa-calendar-alt"></i>{processData(selectedEvent.dateTime)}</p>
+          <p><i className="fa fa-user"></i> {selectedEvent.attendeesAmount}</p>
+          </div>
+            <button className="modal__close" onClick={closeModal}>
+              &#10006;
+            </button>
+            <div className="crud_btns">
+            <Link to={`/manage-events/update-events/${selectedEvent.id}`} className="update">
+              <button type="button" className='update-btn' onClick={handleUpdate}>
+                Update
               </button>
-              <div className="crud_btns">
-                <Link to={`/manage-events/update-event/${selectedEvent.id}`} className="update">
-                  <button type="button" className='update-btn' onClick={handleUpdate}>
-                    Update
-                  </button>
-                </Link>
-                <button type="button" className='delete-btn' onClick={() => handleDelete(selectedEvent.id)}>
-                  Delete
-                </button>
-              </div>
+            </Link>
+
+              
+              <button type="button" className='delete-btn' onClick={() => handleDelete(selectedEvent.id)}>
+                Delete
+              </button>
             </div>
           </div>
-        )}
+        </div>
+      )}
       </div>
     </div>
   );

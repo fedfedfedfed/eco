@@ -24,7 +24,10 @@ const UpdateEvent = () => {
     const fetchEvent = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/events/${eventId}`);
-        setFormData(response.data);
+        const formattedDateTime = new Date(response.data.dateTime).toISOString().slice(0, 16);
+      setFormData({ ...response.data, dateTime: formattedDateTime });
+       // setFormData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching event:', error);
       }
@@ -40,7 +43,8 @@ const UpdateEvent = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8080/api/events/${eventId}`, formData);
+      const response = axios.put(`http://localhost:8080/api/events`, formData);
+      console.log(response.data);
       navigate('/manage-events'); // Redirect to the events page after updating an event
     } catch (error) {
       console.error('Error updating event:', error);
@@ -48,10 +52,10 @@ const UpdateEvent = () => {
   };
 
   return (
-    <div className="update-event-container">
+    <div className="update-recipe-container">
       <Header />
-      <h2 className='events-title'>Update Event</h2>
-      <form className="event-form" onSubmit={handleUpdate}>
+      <h2 className='recipe-title'>Update Event</h2>
+      <form className="recipe-form" onSubmit={handleUpdate}>
         <div className="form-group">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
