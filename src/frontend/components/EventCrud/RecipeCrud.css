@@ -57,9 +57,7 @@
   margin-bottom: 20px;
   text-align: center;
 }
-.recipe-card {
-  width: 250px;
-}
+
 .see-more {
   text-align: center;
   margin: 10px;
@@ -117,11 +115,7 @@
   font-weight: 400;
   line-height: 18px;
 }
-.recipe-card {
-  width: 250px;
-border-radius: 8px;
-background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00) 108.72%),
-}
+
 .recipe-image {
   width: 250px;
 height: 287px;
@@ -180,7 +174,20 @@ button {
   flex-direction: column;
   justify-content: space-between; /* Put view recipe at the end of the container */
 }
-
+.recipe-card {
+  width: 250px;
+border-radius: 8px;
+background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00) 108.72%),
+}
+.recipe-card:hover {
+  transform: scale(1.02);
+  transform: translateY(-1rem);
+  transition: all 0.5s ease-in-out;
+}
+.recipe-card{
+  border: 1px solid #ddd;
+  padding: 10px;
+}
 
 .recipe-image {
   height: 12rem;
@@ -200,11 +207,7 @@ button {
 }
 /* Hover Effects */
 
-.recipe-card:hover {
-   transform: scale(1.02);
-   transform: translateY(-1rem);
-   transition: all 0.5s ease-in-out;
-}
+
 
 /* Red Delete Button */
 .delete-btn {

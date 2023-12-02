@@ -14,22 +14,43 @@ const AddRecipe = () => {
     imageUrl: '',
     cookingTime: 0,
   });
-
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    imageUrl: '',
+  });
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if(validateInput()) {
     try {
       await axios.post('http://localhost:8080/api/recipes', formData);
       navigate('/manage-recipes'); // Redirect to the recipes page after adding a recipe
     } catch (error) {
       console.error('Error creating recipe:', error);
     }
+  }
   };
+  const validateInput = () => {
+    let isValid = true;
+    const errors = {};
 
+    // Validate Title - only letters
+    if (!/^[A-Za-z\s]+$/.test(formData.title)) {
+      isValid = false;
+      errors.title = 'Only letters and spaces are allowed';
+    }
+    // Validate Image URL - starts with http or https
+    if (!/^https?:\/\//.test(formData.imageUrl)) {
+      isValid = false;
+      errors.imageUrl = 'Image URL must start with http:// or https://';
+    }
+
+    setValidationErrors(errors);
+    return isValid;
+  };
   return (
     <div className="add-recipe-container">
         <Header />
@@ -46,7 +67,9 @@ const AddRecipe = () => {
           required
         />
       </div>
-
+      {validationErrors.title && (
+            <div className="error-message">{validationErrors.title}</div>
+          )}
       <div className="form-group">
         <label htmlFor="description">Description:</label>
         <textarea
@@ -138,7 +161,9 @@ const AddRecipe = () => {
           required
         />
       </div>
-
+      {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
+          )}
       <button className='add_btn' type="submit">Add Recipe</button>
     </form>
     </div>

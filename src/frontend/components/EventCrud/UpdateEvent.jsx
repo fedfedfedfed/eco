@@ -19,7 +19,10 @@ const UpdateEvent = () => {
     organizer: '',
     attendeesAmount: 0,
   });
-
+  const [validationErrors, setValidationErrors] = useState({
+    imageUrl: '',
+    eventType: '',
+  });
   useEffect(() => {
     const fetchEvent = async () => {
       try {
@@ -41,6 +44,7 @@ const UpdateEvent = () => {
   };
 
   const handleUpdate = async (e) => {
+    if (validateInput()) {
     e.preventDefault();
     try {
       const response = axios.put(`http://localhost:8080/api/events`, formData);
@@ -49,8 +53,25 @@ const UpdateEvent = () => {
     } catch (error) {
       console.error('Error updating event:', error);
     }
+  }
   };
+  const validateInput = () => {
+    let isValid = true;
+    const errors = {};
 
+    // Validate Image URL - starts with http or https
+    if (!/^https?:\/\//.test(formData.imageUrl)) {
+      isValid = false;
+      errors.imageUrl = 'Image URL must start with http:// or https://';
+    }
+    const validEventTypes = ['ONLINE', 'OFFLINE'];
+    if (!validEventTypes.includes(formData.eventType.toUpperCase())) {
+      isValid = false;
+      errors.eventType = 'Event Type must be ONLINE or OFFLINE';
+    }
+    setValidationErrors(errors);
+    return isValid;
+  };
   return (
     <div className="update-recipe-container">
       <Header />
@@ -67,7 +88,9 @@ const UpdateEvent = () => {
             required
           />
         </div>
-
+        {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
+          )}
         <div className="form-group">
           <label htmlFor="eventName">Event Name:</label>
           <input
@@ -91,7 +114,9 @@ const UpdateEvent = () => {
             required
           />
         </div>
-
+        {validationErrors.eventType && (
+            <div className="error-message">{validationErrors.eventType}</div>
+          )}
         <div className="form-group">
           <label htmlFor="dateTime">Date and Time:</label>
           <input

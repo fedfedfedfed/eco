@@ -16,7 +16,10 @@ const UpdateRecipe = () => {
       imageUrl: '',
       cookingTime: 0,
     });
-  
+    const [validationErrors, setValidationErrors] = useState({
+      title: '',
+      imageUrl: '',
+    });
     useEffect(() => {
       const fetchRecipe = async () => {
         try {
@@ -37,6 +40,7 @@ const UpdateRecipe = () => {
   
     const handleUpdate = async (e) => {
         e.preventDefault();
+        if (validateInput()) {
       try {
         const response = await axios.put(`http://localhost:8080/api/recipes`, formData);
         console.log(response.data);
@@ -44,8 +48,27 @@ const UpdateRecipe = () => {
       } catch (error) {
         console.error('Error updating recipe:', error);
       }
+    }
     };
-
+    const validateInput = () => {
+      let isValid = true;
+      const errors = {};
+  
+      // Validate Title - only letters
+      if (!/^[A-Za-z\s]+$/.test(formData.title)) {
+        isValid = false;
+        errors.title = 'Only letters and spaces are allowed';
+      }
+  
+      // Validate Image URL - starts with http or https
+      if (!/^https?:\/\//.test(formData.imageUrl)) {
+        isValid = false;
+        errors.imageUrl = 'Image URL must start with http:// or https://';
+      }
+  
+      setValidationErrors(errors);
+      return isValid;
+    };
   return (
     
     <div className="add-recipe-container">
@@ -63,7 +86,9 @@ const UpdateRecipe = () => {
           required
         />
       </div>
-
+      {validationErrors.title && (
+            <div className="error-message">{validationErrors.title}</div>
+          )}
       <div className="form-group">
         <label htmlFor="description">Description:</label>
         <textarea
@@ -155,6 +180,9 @@ const UpdateRecipe = () => {
           required
         />
       </div>
+      {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
+          )}
       <div className='update_btns_wrapper'>
       <Link to={`/manage-recipes`} className="update">
               <button type="button" className='cancel-btn'>

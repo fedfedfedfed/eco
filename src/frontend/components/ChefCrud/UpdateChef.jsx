@@ -17,6 +17,14 @@ const UpdateChef = () => {
         imageUrl: '',
     });
 
+    const [validationErrors, setValidationErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        experience: '',
+      });
+
     useEffect(() => {
         const fetchChef = async () => {
             try {
@@ -37,6 +45,7 @@ const UpdateChef = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+        if (validateInput()){
       try {
         const response = await axios.put(`http://localhost:8080/api/chefs`, formData);
         console.log(response.data);
@@ -44,7 +53,50 @@ const UpdateChef = () => {
       } catch (error) {
         console.error('Error updating chef:', error);
       }
+    }
     };
+    const validateInput = () => {
+        let isValid = true;
+        const errors = {};
+    
+        // Validate First Name - only letters
+        if (!/^[A-Za-z]+$/.test(formData.firstName)) {
+          isValid = false;
+          errors.firstName = 'Only letters are allowed';
+        }
+    
+        // Validate Last Name - only letters
+        if (!/^[A-Za-z]+$/.test(formData.lastName)) {
+          isValid = false;
+          errors.lastName = 'Only letters are allowed';
+        }
+    
+        // Validate Email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          isValid = false;
+          errors.email = 'Invalid email address';
+        }
+    
+        // Validate Phone Number - only digits
+        if (!/^\d+$/.test(formData.phoneNumber)) {
+          isValid = false;
+          errors.phoneNumber = 'Only digits are allowed';
+        }
+    
+        // Validate Experience - only digits
+        if (!/^\d+$/.test(formData.experience)) {
+          isValid = false;
+          errors.experience = 'Only digits are allowed';
+        }
+  
+        if (!/^https?:\/\//.test(formData.imageUrl)) {
+        isValid = false;
+        errors.imageUrl = 'Image Url must start with http:// or https://';
+      }
+    
+        setValidationErrors(errors);
+        return isValid;
+      };
     
     return (
         <div className="recipe-chef-container">
@@ -62,7 +114,9 @@ const UpdateChef = () => {
                         required
                     />
                 </div>
-
+                {validationErrors.firstName && (
+            <div className="error-message">{validationErrors.firstName}</div>
+          )}
                 <div className="form-group">
                     <label htmlFor="lastName">Last Name:</label>
                     <input
@@ -74,7 +128,9 @@ const UpdateChef = () => {
                         required
                     />
                 </div>
-
+                {validationErrors.lastName && (
+            <div className="error-message">{validationErrors.lastName}</div>
+          )}
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
                     <input
@@ -86,7 +142,9 @@ const UpdateChef = () => {
                         required
                     />
                 </div>
-
+                {validationErrors.email && (
+            <div className="error-message">{validationErrors.email}</div>
+          )}
                 <div className="form-group">
                     <label htmlFor="phoneNumber">Phone Number:</label>
                     <input
@@ -98,7 +156,9 @@ const UpdateChef = () => {
                         required
                     />
                 </div>
-
+                {validationErrors.phoneNumber && (
+            <div className="error-message">{validationErrors.phoneNumber}</div>
+          )}
                 <div className="form-group">
                     <label htmlFor="experience">Experience:</label>
                     <input
@@ -111,7 +171,9 @@ const UpdateChef = () => {
                         min="0"
                     />
                 </div>
-
+                {validationErrors.experience && (
+            <div className="error-message">{validationErrors.experience}</div>
+          )}
                 <div className="form-group">
                     <label htmlFor="biography">Biography:</label>
                     <textarea
@@ -133,7 +195,9 @@ const UpdateChef = () => {
                         required
                     />
                 </div>
-
+                {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
+          )}
                 <div className='update_btns_wrapper'>
                     <Link to={`/manage-chefs`} className="update">
                         <button type="button" className='cancel-btn'>

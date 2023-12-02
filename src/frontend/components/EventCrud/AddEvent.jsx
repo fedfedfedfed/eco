@@ -18,22 +18,51 @@ const AddEvent = () => {
     organizer: '',
     attendeesAmount: 0,
   });
-
+  const [validationErrors, setValidationErrors] = useState({
+    imageUrl: '',
+    eventType: '',
+  });
+  
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (validateInput()) {
     try {
       await axios.post('http://localhost:8080/api/events', formData);
       navigate('/manage-events'); // Redirect to the events page after adding an event
     } catch (error) {
       console.error('Error creating event:', error);
     }
+  }
   };
+  const validateInput = () => {
+    let isValid = true;
+    const errors = {};
 
+    // Validate Image URL - starts with http or https
+    if (!/^https?:\/\//.test(formData.imageUrl)) {
+      isValid = false;
+      errors.imageUrl = 'Image URL must start with http:// or https://';
+    }
+    const validEventTypes = ['ONLINE', 'OFFLINE'];
+    if (!validEventTypes.includes(formData.eventType.toUpperCase())) {
+      isValid = false;
+      errors.eventType = 'Event Type must be ONLINE or OFFLINE';
+    }
+    const currentDateTime = new Date();
+  const selectedDateTime = new Date(formData.dateTime);
+  
+  if (selectedDateTime <= currentDateTime) {
+    isValid = false;
+    errors.dateTime = 'Please select a future date and time';
+  }
+
+    setValidationErrors(errors);
+    return isValid;
+  };
   return (
     <div className="add-recipe-container">
       <Header />
@@ -50,7 +79,9 @@ const AddEvent = () => {
             required
           />
         </div>
-
+        {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
+          )}
         <div className="form-group">
           <label htmlFor="eventName">Event Name:</label>
           <input
@@ -62,7 +93,7 @@ const AddEvent = () => {
             required
           />
         </div>
-
+        
         <div className="form-group">
           <label htmlFor="eventType">Event Type:</label>
           <input
@@ -74,7 +105,9 @@ const AddEvent = () => {
             required
           />
         </div>
-
+        {validationErrors.eventType && (
+            <div className="error-message">{validationErrors.eventType}</div>
+          )}
         <div className="form-group">
           <label htmlFor="dateTime">Date and Time:</label>
           <input
@@ -86,7 +119,9 @@ const AddEvent = () => {
             required
           />
         </div>
-
+        {validationErrors.dateTime && (
+    <div className="error-message">{validationErrors.dateTime}</div>
+  )}
         <div className="form-group">
           <label htmlFor="location">Location:</label>
           <input

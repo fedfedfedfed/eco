@@ -4,6 +4,7 @@ import ChefAbout from './ChefAbout';
 import './AboutUs.css';
 import VideoAdd from './VideoAbout';
 import EventAbout from './EventAbout';
+import '../EventCrud/RecipeCrud.css';
 
 const AboutUs = () => {
     return(
