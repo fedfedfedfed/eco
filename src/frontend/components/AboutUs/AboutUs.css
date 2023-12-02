@@ -17,6 +17,16 @@
     font-weight: 700;
     text-align: center;
 }
+.recipe-details {
+    gap:20px;
+}
+  .centered {
+    margin-left: 35%;
+  }
+.hero-title {
+    text-align: center;
+  }
+
  .about_h {
     text-align: center;
     margin-bottom: 14px;
@@ -47,7 +57,8 @@
   /* tablet break-point*/
   @media only screen and (min-width: 768px) {
     .hero-title {
-      max-width: 446px;
+      max-width: 600px;
+      text-align: center;
     }
     .about_h {
       font-size: 36px;
@@ -108,7 +119,8 @@
     }
   
     .hero-title {
-      padding-top: 66px;
+      padding-top: 10px;
+      text-align: center;
     }
   
     .hero-container {

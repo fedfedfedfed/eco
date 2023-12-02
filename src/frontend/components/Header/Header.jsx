@@ -5,6 +5,7 @@ import './header.css';
 import './forms.css';
 import { toggleTheme } from '../../redux/themeReducer';
 
+
 const Header = () => {
   return (
     <header className="header">
@@ -15,9 +16,6 @@ const Header = () => {
       <ul className="nav-list">
         <li className="nav-item">
           <a href="/" className="nav-link">Home</a>
-        </li>
-        <li className="nav-item">
-          <a href="./favorites.html" className="nav-link">Favorites</a>
         </li>
         <li className="nav-item">
           <a href="/manage-chefs" className="nav-link">Chef</a>

@@ -1,22 +1,15 @@
 import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { useHistory, useNavigate } from 'react-router-dom';
 import './herosection.css';
-import './buttons.css';
-import './popup.js';
 
 const HeroSection = () => {
-  const chiefPhotoUrl = 'https://tasty-treats-backend.p.goit.global/imgDish1.webp';
-  const dishPhotoUrl = 'https://tasty-treats-backend.p.goit.global/previewDish1.webp';
-  const cuisinePreviewPhotoUrl = 'https://tasty-treats-backend.p.goit.global/imgDish1.webp';
+  // const history = useHistory();
+  const navigate = useNavigate();
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+  const handleLoginClick = () => {
+    // Redirect to the /login page
+    // history.push('/login');
+    navigate('/login');
   };
 
   return (
@@ -32,46 +25,25 @@ const HeroSection = () => {
             TastyTreats - Customize Your Meal with Ingredient Options and
             Step-by-Step Video Guides.
           </p>
+
           <button
             className="hero-btn-order btn btn-outline"
             type="button"
             data-order-popup-open
+            onClick={handleLoginClick}  // Call the handleLoginClick function on button click
           >
-            Order now
+            Log in
           </button>
-        </div>
 
-        <Slider {...settings}>
-        <div className="hero-card">
-            <div className="cuisine-preview">
-              <img
-                className="cuisine-preview-photo"
-                src={cuisinePreviewPhotoUrl}
-                alt="Preview"
-              />
-            </div>
-          </div>
-          <div className="hero-card">
-            <div className="dish">
-              <img
-                className="dish-photo"
-                src={dishPhotoUrl}
-                alt="dish"
-              />
-              <h2 className="dish-name">Grilled, smoky, delicious barbecue</h2>
-              <p className="dish-area">Spanish</p>
-            </div>
-          </div>
-          <div className="hero-card">
-            <div className="cuisine-preview">
-              <img
-                className="cuisine-preview-photo"
-                src={cuisinePreviewPhotoUrl}
-                alt="Preview"
-              />
-            </div>
-          </div>
-        </Slider>
+        </div>
+        <div className="chief">
+          <img
+            className="chief-photo"
+            src="https://tasty-treats-backend.p.goit.global/HestonChan.webp"
+            alt="Chief"
+          />
+        </div>
+        <div className="swiper-pagination"></div>
       </div>
     </section>
   );

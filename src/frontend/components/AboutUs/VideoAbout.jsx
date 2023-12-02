@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
-const VideoAdd = () => {
-  const [videos, setVideos] = useState([ {
-    id: 1,
-    title: 'Video 1',
-    description: 'Description for Video 1',
-    videoUrl: 'https://www.youtube.com/embed/mG4NLNZ37y4?si=VPugg6mXknQuEDKf',
-  },
-  {
-    id: 2,
-    title: 'Video 2',
-    description: 'Description for Video 2',
-    videoUrl: 'https://www.youtube.com/embed/fGuKrPMjYXw?si=R2d6T5kDJq7AytQ_',
-  },
-  {
-    id: 3,
-    title: 'Video 3',
-    description: 'Description for Video 3',
-    videoUrl: 'https://www.youtube.com/embed/b9eMGE7QtTk?si=A7x7NmMBl8rhKR2e',
-  },]);
+
+const VideoTutorialCrud = () => {
+    const [videos, setVideos] = useState([
+        {
+          id: 1,
+          title: 'Video 1',
+          description: 'Description for Video 1',
+          videoUrl: 'https://imgur.com/Gqnou9J',
+        },
+        {
+          id: 2,
+          title: 'Video 2',
+          description: 'Description for Video 2',
+          videoUrl: 'https://imgur.com/Gqnou9J',
+        },
+        {
+          id: 3,
+          title: 'Video 3',
+          description: 'Description for Video 3',
+          videoUrl: 'https://imgur.com/Gqnou9J',
+        },
+      ]);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -28,6 +32,25 @@ const VideoAdd = () => {
   });
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const NextArrow = (props) => {
+    const { onClick } = props;
+    return <div className="arrow next" onClick={onClick}><i className="fas fa-chevron-right"></i></div>;
+  };
+
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return <div className="arrow prev" onClick={onClick}><i className="fas fa-chevron-left"></i></div>;
+  };
+
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5, // Adjust the number of slides to show
+    slidesToScroll: 1,
+  };
 
   useEffect(() => {
     fetchVideos();
@@ -55,7 +78,6 @@ const VideoAdd = () => {
       setFormData({
         title: '',
         description: '',
-        videoUrl: '',
       });
     } catch (error) {
       console.error('Error creating video tutorial:', error);
@@ -115,104 +137,55 @@ const VideoAdd = () => {
     });
     document.body.classList.remove('modal-open');
   };
-  return (
-    <div className='wrapper'>
+ return (
+    <div className="wrapper">
       <div className="recipe-container">
         <div className="header_wrapper">
           <div>
-            <h1 className='recipes-title'>Відеоуроки</h1>
+            <h1 className="recipes-title">Video Tutorials</h1>
           </div>
-  
+
           <div id="open-modal" className="modal-window">
-            <div>
-              <a href="#" title="Закрити" className="modal-close">&#10006;</a>
-              <form className="recipe-form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="title">Назва:</label>
-                  <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-  
-                <div className="form-group">
-                  <label htmlFor="description">Опис:</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-  
-                <div className="form-group">
-                  <label htmlFor="videoUrl">Посилання на відео:</label>
-                  <input
-                    type="text"
-                    id="videoUrl"
-                    name="videoUrl"
-                    value={formData.videoUrl}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-  
-                <button className='add_btn' type="submit">Додати відеоурок</button>
-              </form>
-            </div>
+            {/* ... (existing code) */}
           </div>
         </div>
-  
-        <ul className='recipe_wrapper'>
-        {videos.map((video) => (
-  <li key={video.id} className="recipe-card">
-    <div className="recipe-details">
-      <h3 className="recipe_title">{video.title}</h3>
-      <p className='recipe-description'>{video.description}</p>
-      <div className="video-container">
-        <iframe
-          title={video.title}
-          src={video.videoUrl}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-      <a
-        className="see-more"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSeeMore(video);
-        }}
-        href={`#video-modal-${video.id}`}
-      >
-        Дивитися урок
-      </a>
-    </div>
-  </li>
-))}
 
-        </ul>
-  
+        {/* Replace your existing list with the Slider component */}
+        <Slider {...sliderSettings} nextArrow={<NextArrow />} prevArrow={<PrevArrow />}>
+          {videos.map((video) => (
+            <div className="header_wrapper">
+            <div key={video.id} className="recipe-card">
+              <div className="recipe-details">
+                <h3 className="recipe_title">{video.title}</h3>
+                <p className="recipe-description">{video.description}</p>
+                <img src={video.videoUrl} alt={video.title} className="video-image" />
+                <a
+                  className="see-more"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSeeMore(video);
+                  }}
+                  href={`#video-modal-${video.id}`}
+                >
+                  Watch Tutorial
+                </a>
+              </div>
+            </div>
+            </div>
+          ))}
+        </Slider>
+
         {selectedVideo && (
           <div id={`video-modal-${selectedVideo.id}`} className="modal">
             <div className="modal__content">
-              <h2 className='modal_title'>{selectedVideo.title}</h2>
-              <iframe
-                title={selectedVideo.title}
-                src="https://www.youtube.com/watch?v=b9eMGE7QtTk&ab_channel=JavaScriptMastery"
+              <h2 className="modal_title">{selectedVideo.title}</h2>
+              <img
+                src={selectedVideo.videoUrl}
+                alt={selectedVideo.title}
                 className="modal-video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <p className='modal_description'>{selectedVideo.description}</p>
-  
+              />
+              <p className="modal_description">{selectedVideo.description}</p>
+
               <button className="modal__close" onClick={closeModal}>
                 &#10006;
               </button>
@@ -225,4 +198,4 @@ const VideoAdd = () => {
   
 };
 
-export default VideoAdd;
+export default VideoTutorialCrud;
