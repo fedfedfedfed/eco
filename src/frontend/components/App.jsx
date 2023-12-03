@@ -4,6 +4,7 @@ import Header from './Header/Header';
 import ModalOrder from './ModalOrder/ModalOrder';
 import PopUp from './PopUp/PopUp';
 import HeroSection from './HeroSection/HeroSection';
+import UserCrud from './UserCrud/UserCrud';
 import Recipes from './Recipes/Recipes';
 import RecipeCrud from './RecipeCrud/RecipeCrud';
 import AboutUs from './AboutUs/AboutUs';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/manage-events" element={<EventCrud />} />
           <Route path="/manage-events/add-event" element={<AddEvent />} />
           <Route path="/manage-events/update-events/:eventId" element={<UpdateEvent />} />
+          <Route path="/user" element={<UserCrud />} />
           <Route path="/aboutus" element={<AboutUs />} />
           
           {/* Додайте маршрут для LoginPage */}
