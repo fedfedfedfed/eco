@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './RecipeCrud.css';
 import Header from '../Header/Header';
 
-const EventCrud = () => {
+const EventCrud = (props) => {
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     imageUrl: '',
@@ -124,7 +124,6 @@ const EventCrud = () => {
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
-      //second: 'numeric',
       timeZone: 'Europe/Kiev',
     };
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(rawDate);
@@ -133,15 +132,14 @@ const EventCrud = () => {
   }
   const truncateDescription = (description) => {
     const words = description.split(' ');
-  
-    // Take the first two lines (assuming each line has a maximum of 10 words)
+
     const truncatedDescription = words.slice(0, 10).join(' ') + "...";
   
     return truncatedDescription;
   };
   return (
     <div className='wrapper'>
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
         <div className="header_wrapper">
           <div>
@@ -155,8 +153,7 @@ const EventCrud = () => {
             <div>
               <a href="#" title="Close" className="modal-close">&#10006;</a>
               <form className="recipe-form" onSubmit={handleSubmit}>
-                {/* Add form fields for Event */}
-                {/* You can use similar structure as in RecipeCrud */}
+               
               </form>
             </div>
           </div>
@@ -168,7 +165,7 @@ const EventCrud = () => {
               className="recipe-card"
             >
               <div className="recipe-details">
-                {/* Display event information */}
+               
                 <img src={event.imageUrl} alt={event.eventName} className="recipe-image" />
                 <h3 className="recipe_title">{event.eventName}</h3>
                 <p className='recipe-description'>{truncateDescription(event.description)}</p>
@@ -187,7 +184,7 @@ const EventCrud = () => {
           ))}
         </ul>
 
-        {/* Modal for displaying full event information */}
+       
         {selectedEvent && (
         <div id={`recipe-modal-${selectedEvent.id}`} className="modal">
           <div className="modal__content">

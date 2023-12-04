@@ -5,7 +5,6 @@ const Filters = () => {
     const [time, setTime] = useState(0);
   
     const handleTimeChange = (e) => {
-      // Ви можете додати логіку валідації часу тут
       setTime(e.target.value);
     };
   

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import './UserCrud.css'; // Ваш файл стилів CSS
+import './UserCrud.css'; 
 import Header from '../Header/Header';
 
-const UserCrud = () => {
+const UserCrud = (props) => {
   const [users, setUsers] = useState([
-    { id: 1, username: 'user1', password: 'pass1' },
-    { id: 2, username: 'user2', password: 'pass2' },
-    // Додайте інші користувачі за потреби
+    { id: 1, username: 'admin', password: 'password' },
+    { id: 2, username: 'kirostina', password: 'password' },
   ]);
 
   const [newUser, setNewUser] = useState({ username: '', password: '' });
@@ -50,7 +49,7 @@ const UserCrud = () => {
 
   return (
     <div className=''>
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="user-table-container">
         <h2>User Table</h2>
         <div className="add-user-form">

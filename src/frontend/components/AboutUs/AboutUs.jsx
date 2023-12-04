@@ -6,12 +6,12 @@ import VideoAdd from './VideoAbout';
 import EventAbout from './EventAbout';
 import '../EventCrud/RecipeCrud.css';
 
-const AboutUs = () => {
+const AboutUs = (props) => {
     return(
         <div>
-        <Header/>
+        <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
         <div class="hero-title centered">
-    <h1 className='about_h'>About <span className='span'>TastyTreats</span></h1>
+    <h1 className='about_h'>About <span className='span'>Tasty Treats</span></h1>
     <p className='about_text'>Welcome to <span className='span'>TastyTreats</span>, where passion for food meets exceptional taste. We are more than just a brand; we are a culinary journey, crafting delightful experiences for your palate.</p>
     
     <p className='aboutp'><span className='ourspan'>Our</span> Story:</p>

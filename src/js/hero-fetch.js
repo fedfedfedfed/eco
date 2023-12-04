@@ -5,8 +5,6 @@ heroData();
 async function heroData() {
   try {
     const result = await fetchEvents();
-    //console.log(result);
-    //elements.cards.innerHTML = createMarkupEvents(result);
   } catch {
     Notify.failure('Oops! Something went wrong! Try reloading the page!');
   }

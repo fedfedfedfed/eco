@@ -38,7 +38,6 @@ function setCardsLimitResizer() {
 async function defaultData() {
   try {
     const result = await fetchCards(currentlimit);
-    // console.log(result.results);
     elements.cards.innerHTML = createMarkupGridCard(result.results);
   } catch {
     Notify.failure("Oops! Something went wrong! Try reloading the page!");

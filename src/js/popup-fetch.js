@@ -5,8 +5,6 @@ popupData();
 async function popupData() {
   try {
     const result = await fetchPopup();
-    //console.log(result);
-    //elements.cards.innerHTML = createMarkupPopup(result);
   } catch {
     Notify.failure('Oops! Something went wrong! Try reloading the page!');
   }

@@ -1,46 +1,60 @@
-import React from "react";
-import style from './LoginPage.module.css'
-import { useDispatch } from "react-redux";
-import { loginThunk } from "./authReducer";
-import { useForm } from "react-hook-form";
 
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 const LoginPage = () => {
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-      } = useForm();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/auth/login', {
+        username,
+        password,
+      });
+  
+      const { jwt } = response.data;
+      console.log(jwt);
+      localStorage.setItem('jwtToken', jwt);
+  
+      console.log('Login successful:', response.data);
+      navigate("/");
+    } catch (error) {
+      console.error('Login failed:', error.response.data);
+    }
+  };
+  
 
-    const dispatch = useDispatch();
+  return (
+    <div className='login_container'>
 
-    const onSubmit = data => {
-      dispatch(loginThunk(data))
-      reset();
-    };
-
-    return (
-      <div className={style['container']}>
-        <form className={style['form']} onSubmit={handleSubmit(onSubmit)}>
-          <p className={style['form-text']}>Welcome</p>
-          
-          
-            <input {...register('email', { required: true })} type="email" placeholder="Email" />
-            {errors.email && <span>❌</span>}
-          
-            
-            <input
-              {...register('password', { required: true, minLength: 7 })}
-              type="password" placeholder="Password"
-            />
-            {errors.password && <span>❌</span>}
-          
     
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-        
-      );
-}
+    <form className='form'>
+      <label>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </label>
+      <br />
+      <button type="button" onClick={handleLogin}>
+        Login
+      </button>
+    </form>
+    </div>
+  );
+};
 
 export default LoginPage;

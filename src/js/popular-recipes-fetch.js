@@ -5,8 +5,6 @@ popularData();
 async function popularData() {
   try {
     const result = await fetchPopular();
-    //console.log(result);
-    //elements.cards.innerHTML = createMarkupPopular(result);
   } catch {
     Notify.failure('Oops! Something went wrong! Try reloading the page!');
   }

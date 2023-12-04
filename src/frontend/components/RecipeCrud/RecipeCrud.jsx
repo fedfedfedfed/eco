@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 import './RecipeCrud.css';
 import Header from '../Header/Header'
 
-const RecipeCrud = () => {
+const RecipeCrud = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -110,7 +110,7 @@ const RecipeCrud = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.classList.add('modal-open'); // Add class to body
+    document.body.classList.add('modal-open'); 
   };
   const closeModal = () => {
     setIsModalOpen(false);
@@ -123,25 +123,23 @@ const RecipeCrud = () => {
       imageUrl: '',
       cookingTime: 0,
     });
-    document.body.classList.remove('modal-open'); // Remove class from body
+    document.body.classList.remove('modal-open'); 
   };
   const truncateDescription = (description) => {
     const words = description.split(' ');
   
-    // Take the first two lines (assuming each line has a maximum of 10 words)
     const truncatedDescription = words.slice(0, 10).join(' ') + "...";
   
     return truncatedDescription;
   };
   return (
     <div className='wrapper'>
-              <Header />
+              <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
     <div className="recipe-container">
       <div className="header_wrapper">
         <div>
       <h1 className='recipes-title'>Recipes</h1>
       </div>
-      {/*<a classNamem="add" href='#open-modal'><span>+</span></a>*/}
       <Link to="/manage-recipes/add-recipe" className="add">
             <span>+</span>
           </Link>
@@ -286,7 +284,6 @@ const RecipeCrud = () => {
         ))}
       </ul>
 
-      {/* Modal for displaying full recipe information */}
       {selectedRecipe && (
         <div id={`recipe-modal-${selectedRecipe.id}`} className="modal">
           <div className="modal__content">
@@ -324,8 +321,6 @@ const RecipeCrud = () => {
         </div>
       )}
 
-      {/* Form for adding and updating recipes */}
-      {/* Form for updating recipes */}
       
     </div>
     </div>

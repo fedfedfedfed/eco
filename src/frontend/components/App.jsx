@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import Header from './Header/Header';
 import ModalOrder from './ModalOrder/ModalOrder';
 import PopUp from './PopUp/PopUp';
 import HeroSection from './HeroSection/HeroSection';
-import UserCrud from './UserCrud/UserCrud';
 import Recipes from './Recipes/Recipes';
 import RecipeCrud from './RecipeCrud/RecipeCrud';
 import AboutUs from './AboutUs/AboutUs';
@@ -21,42 +20,46 @@ import AddRecipe from './RecipeCrud/AddRecipe';
 import AddChef from './ChefCrud/AddChef';
 import UpdateChef from './ChefCrud/UpdateChef';
 import UpdateRecipe from './RecipeCrud/UpdateRecipe';
-import LoginPage from '../pages/LoginPage/LoginPage'; // Додайте імпорт LoginPage
+import LoginPage from '../pages/LoginPage/LoginPage'; 
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
-// Modify App to include routing
+import { useEffect, useState } from 'react';
+import NotFound from '../pages/Forbiddenpage/NotFound';
+import UserCrud from './UserCrud/UserCrud';
+
 function App() {
+  const [userRole, setUserRole] = useState('ADMIN');
+
+
+
   return (
     <Router>
       <div className="App">
-        {/* Your header component */}
-
-        {/* Routing */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route path="/manage-chefs" element={<ChefCrud />} />
-          <Route path="/manage-chefs/add-chefs" element={<AddChef />} />
-          <Route path="/manage-chefs/update-chefs/:chefId" element={<UpdateChef />} />
-          <Route path="/manage-recipes" element={<RecipeCrud />} />
-          <Route path="/manage-recipes/add-recipe" element={<AddRecipe />} />
-          <Route path="/manage-recipes/update-recipe/:recipeId" element={<UpdateRecipe />} />
-          <Route path="/manage-video-tutorials" element={<VideoTutorialCrud />} />
-          <Route path="/manage-video-tutorials/add-video-tutorials" element={<VideoTutorialAdd />} />
-          <Route path="/manage-tutorials/update-video-tutorials/:video-tutorialId" element={<VideoTutorialUpdate />} />
-          <Route path="/manage-events" element={<EventCrud />} />
-          <Route path="/manage-events/add-event" element={<AddEvent />} />
-          <Route path="/manage-events/update-events/:eventId" element={<UpdateEvent />} />
-          <Route path="/user" element={<UserCrud />} />
-          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/forbidden" element={<NotFound />} />
+          <Route path="/" element={<HomePage userRole={userRole} setUserRole={setUserRole}/>} />
+          {userRole === 'ADMIN' && <React.Fragment>
+          <Route path="/manage-chefs" element={<ChefCrud userRole={userRole} setUserRole={setUserRole}/>} />
           
-          {/* Додайте маршрут для LoginPage */}
+          <Route path="/manage-chefs/add-chefs" element={<AddChef userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-chefs/update-chefs/:chefId" element={<UpdateChef userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-recipes" element={<RecipeCrud userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-recipes/add-recipe" element={<AddRecipe userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-recipes/update-recipe/:recipeId" element={<UpdateRecipe userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-video-tutorials" element={<VideoTutorialCrud userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-video-tutorials/add-video-tutorials" element={<VideoTutorialAdd userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-video-tutorials/update-video-tutorials/:video_tutorialId" element={<VideoTutorialUpdate userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-events" element={<EventCrud userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-events/add-event" element={<AddEvent userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/manage-events/update-events/:eventId" element={<UpdateEvent userRole={userRole} setUserRole={setUserRole}/>} />
+          <Route path="/user" element={<UserCrud userRole={userRole} setUserRole={setUserRole}/>} />
+          </React.Fragment>
+  } 
+          <Route path="/aboutus" element={<AboutUs userRole={userRole} setUserRole={setUserRole}/>} />
+          
           <Route path="/login" element={<LoginPage />} />
 
-          {/* Додайте маршрут для RegisterPage */}
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
-
-        {/* Your modal and popup components */}
       </div>
     </Router>
   );

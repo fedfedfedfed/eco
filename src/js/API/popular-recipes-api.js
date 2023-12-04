@@ -12,7 +12,7 @@ const fetchPopular = async () => {
   const response = await axios.get(
     `${BASE_URL}${POPULAR_RECIPES_ENDPOINT}?${params}`
   );
-  //console.log(response.data);
+
   return response.data;
 };
 

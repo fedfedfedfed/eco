@@ -22,7 +22,7 @@
   font-size: 26px;
   font-style: normal;
   font-weight: 600;
-  line-height: 1.2; /* 31.2px */
+  line-height: 1.2; 
   text-transform: uppercase;
 }
 .hero-title-accent {
@@ -45,9 +45,8 @@
   margin-top: 28px;
   margin-bottom: 48px;
 }
-/* Друга секція з картками */
+
 .hero-card {
-  /*height: 280px;*/
   height: 100%;
   width: calc(100% + 20px);
   overflow: hidden;
@@ -116,7 +115,6 @@
 }
 .cuisine-preview-photo {
   display: block;
-  /*background: url('https://tasty-treats-backend.p.goit.global/imgDish1.png');*/
   height: 100%;
 }
 .chief-photo {
@@ -138,20 +136,10 @@
 }
 .chief-photo {
   display: block;
-  /*background: url('https://tasty-treats-backend.p.goit.global/imgDish1.png');*/
   height: 100%;
 }
 
-/* mobile */
-/*
-@media only screen and (max-width: 767px) {
-  .hero-title {
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-}
-*/
 
-/* tablet break-point*/
 @media only screen and (min-width: 768px) {
   .hero-title {
     max-width: 446px;
@@ -169,8 +157,6 @@
     margin-bottom: 64px;
   }
   .hero-card {
-    /*height: 442px;*/
-    /*margin-right: -32px;*/
     width: calc(100% + 32px);
   }
 
@@ -204,7 +190,6 @@
   }
 }
 
-/* desktop break-point*/
 @media only screen and (min-width: 1200px) {
   .hero {
     padding-top: 57px;

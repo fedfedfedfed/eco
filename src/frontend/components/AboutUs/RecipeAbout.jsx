@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 
 const RecipeAbout = () => {
   const [recipes, setRecipes] = useState([]);
@@ -108,7 +108,7 @@ const RecipeAbout = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.classList.add('modal-open'); // Add class to body
+    document.body.classList.add('modal-open'); 
   };
   const closeModal = () => {
     setIsModalOpen(false);
@@ -121,12 +121,12 @@ const RecipeAbout = () => {
       imageUrl: '',
       cookingTime: 0,
     });
-    document.body.classList.remove('modal-open'); // Remove class from body
+    document.body.classList.remove('modal-open'); 
   };
   const truncateDescription = (description) => {
     const words = description.split(' ');
   
-    // Take the first two lines (assuming each line has a maximum of 10 words)
+    
     const truncatedDescription = words.slice(0, 10).join(' ') + "...";
   
     return truncatedDescription;
@@ -277,7 +277,6 @@ const RecipeAbout = () => {
         ))}
       </ul>
 
-      {/* Modal for displaying full recipe information */}
       {selectedRecipe && (
         <div id={`recipe-modal-${selectedRecipe.id}`} className="modal">
           <div className="modal__content">
@@ -303,8 +302,6 @@ const RecipeAbout = () => {
         </div>
       )}
 
-      {/* Form for adding and updating recipes */}
-      {/* Form for updating recipes */}
       
     </div>
     </div>

@@ -1,4 +1,4 @@
-// AddEvent.js
+
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import './RecipeCrud.css';
 
-const AddEvent = () => {
+const AddEvent = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     imageUrl: '',
@@ -32,7 +32,7 @@ const AddEvent = () => {
     if (validateInput()) {
     try {
       await axios.post('http://localhost:8080/api/events', formData);
-      navigate('/manage-events'); // Redirect to the events page after adding an event
+      navigate('/manage-events');
     } catch (error) {
       console.error('Error creating event:', error);
     }
@@ -42,7 +42,7 @@ const AddEvent = () => {
     let isValid = true;
     const errors = {};
 
-    // Validate Image URL - starts with http or https
+   
     if (!/^https?:\/\//.test(formData.imageUrl)) {
       isValid = false;
       errors.imageUrl = 'Image URL must start with http:// or https://';
@@ -65,7 +65,7 @@ const AddEvent = () => {
   };
   return (
     <div className="add-recipe-container">
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <h2 className='recipes-title'>Add Event</h2>
       <form className="recipe-form" onSubmit={handleSubmit}>
         <div className="form-group">

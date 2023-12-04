@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 
-const UpdateChef = () => {
+const UpdateChef = (props) => {
     const { chefId } = useParams();
     const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const UpdateChef = () => {
       try {
         const response = await axios.put(`http://localhost:8080/api/chefs`, formData);
         console.log(response.data);
-        navigate('/manage-chefs'); // Redirect to the recipes page after updating a recipe
+        navigate('/manage-chefs'); 
       } catch (error) {
         console.error('Error updating chef:', error);
       }
@@ -59,31 +59,31 @@ const UpdateChef = () => {
         let isValid = true;
         const errors = {};
     
-        // Validate First Name - only letters
+       
         if (!/^[A-Za-z]+$/.test(formData.firstName)) {
           isValid = false;
           errors.firstName = 'Only letters are allowed';
         }
     
-        // Validate Last Name - only letters
+        
         if (!/^[A-Za-z]+$/.test(formData.lastName)) {
           isValid = false;
           errors.lastName = 'Only letters are allowed';
         }
     
-        // Validate Email
+       
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           isValid = false;
           errors.email = 'Invalid email address';
         }
     
-        // Validate Phone Number - only digits
+        
         if (!/^\d+$/.test(formData.phoneNumber)) {
           isValid = false;
           errors.phoneNumber = 'Only digits are allowed';
         }
     
-        // Validate Experience - only digits
+        
         if (!/^\d+$/.test(formData.experience)) {
           isValid = false;
           errors.experience = 'Only digits are allowed';
@@ -100,7 +100,7 @@ const UpdateChef = () => {
     
     return (
         <div className="recipe-chef-container">
-            <Header />
+            <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
             <h2 className='recipe-title'>Update Chef</h2>
             <form className="recipe-form" onSubmit={handleUpdate}>
                 <div className="form-group">

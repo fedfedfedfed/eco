@@ -23,7 +23,7 @@ const EventAbout = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Кількість подій, що відображаються одночасно
+    slidesToShow: 5, 
     slidesToScroll: 1,
   };
 
@@ -81,7 +81,6 @@ const EventAbout = () => {
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
-      //second: 'numeric',
       timeZone: 'Europe/Kiev',
     };
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(rawDate);
@@ -99,13 +98,13 @@ const EventAbout = () => {
           <div>
             <h1 className='recipe-title'>Events</h1>
           </div>
-          {/* Додайте посилання для додавання нової події */}
+          
 
         </div>
 
-        {/* Використовуйте Slider для відображення подій */}
         <Slider {...sliderSettings}>
           {events.map((event) => (
+            <div className="header_wrapper">
             <div key={event.id} className="recipe-card">
               <div className="recipe-details">
                 <img src={event.imageUrl} alt={event.eventName} className="recipe-image" />
@@ -122,6 +121,7 @@ const EventAbout = () => {
                   See event
                 </a>
               </div>
+            </div>
             </div>
           ))}
         </Slider>
@@ -149,7 +149,7 @@ const EventAbout = () => {
           </div>
         </div>
       )}
-        {/* Modal та інші компоненти залишаються такими ж, як і раніше */}
+        
       </div>
     </div>
   );

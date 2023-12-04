@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import './ChefCrud.css';
 
-const AddChef = () => {
+const AddChef = (props) => {
     const navigate = useNavigate();
   
     const [formData, setFormData] = useState({
@@ -46,31 +46,31 @@ const AddChef = () => {
       let isValid = true;
       const errors = {};
   
-      // Validate First Name - only letters
+      
       if (!/^[A-Za-z]+$/.test(formData.firstName)) {
         isValid = false;
         errors.firstName = 'Only letters are allowed';
       }
   
-      // Validate Last Name - only letters
+      
       if (!/^[A-Za-z]+$/.test(formData.lastName)) {
         isValid = false;
         errors.lastName = 'Only letters are allowed';
       }
   
-      // Validate Email
+      
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
         isValid = false;
         errors.email = 'Invalid email address';
       }
   
-      // Validate Phone Number - only digits
+      
       if (!/^\d+$/.test(formData.phoneNumber)) {
         isValid = false;
         errors.phoneNumber = 'Only digits are allowed';
       }
   
-      // Validate Experience - only digits
+      
       if (!/^\d+$/.test(formData.experience)) {
         isValid = false;
         errors.experience = 'Only digits are allowed';
@@ -88,7 +88,7 @@ const AddChef = () => {
     
   return (
     <div className="wrapper">
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
         <h2 className='recipes-title'>Add Chef</h2>
         <div className="form-container">

@@ -1,11 +1,11 @@
-// UpdateEvent.js
+
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 
-const UpdateEvent = () => {
+const UpdateEvent = (props) => {
   const { eventId } = useParams();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const UpdateEvent = () => {
         const response = await axios.get(`http://localhost:8080/api/events/${eventId}`);
         const formattedDateTime = new Date(response.data.dateTime).toISOString().slice(0, 16);
       setFormData({ ...response.data, dateTime: formattedDateTime });
-       // setFormData(response.data);
+       
         console.log(response.data);
       } catch (error) {
         console.error('Error fetching event:', error);
@@ -49,7 +49,7 @@ const UpdateEvent = () => {
     try {
       const response = axios.put(`http://localhost:8080/api/events`, formData);
       console.log(response.data);
-      navigate('/manage-events'); // Redirect to the events page after updating an event
+      navigate('/manage-events'); 
     } catch (error) {
       console.error('Error updating event:', error);
     }
@@ -59,7 +59,7 @@ const UpdateEvent = () => {
     let isValid = true;
     const errors = {};
 
-    // Validate Image URL - starts with http or https
+    
     if (!/^https?:\/\//.test(formData.imageUrl)) {
       isValid = false;
       errors.imageUrl = 'Image URL must start with http:// or https://';
@@ -74,7 +74,7 @@ const UpdateEvent = () => {
   };
   return (
     <div className="update-recipe-container">
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <h2 className='recipe-title'>Update Event</h2>
       <form className="recipe-form" onSubmit={handleUpdate}>
         <div className="form-group">

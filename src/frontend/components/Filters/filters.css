@@ -87,8 +87,6 @@ INPUT & PLACEHILDER
 }
 
 .filters .filter-search::placeholder {
-    /* padding-left: 30px; */
-    /* background-image: url('/svg/search.svg'); */
     background-repeat: no-repeat;
     background-position: 0 center;
 }

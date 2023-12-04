@@ -8,6 +8,45 @@ import '../RecipeCrud/RecipeCrud.css';
 const ITEMS_PER_PAGE = 9;
 
 const PopUp = ({ currentPage, handlePageChange }) => {
+  const [title, setTitle] = useState('');
+    const [time, setTime] = useState('');
+    const [cuisine, setCuisine] = useState('');
+    const [difficulty, setDifficulty] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleResetFilters = () => {
+      setTitle('');
+      setTime('');
+      setCuisine('');
+      setDifficulty('');
+    };
+
+    useEffect(() => {
+      handleSearch();
+    }, [title, time, cuisine, difficulty]);
+
+    const handleSearch = async () => {
+      try {
+        const params = {
+          title: title,
+          time: time === '' ? 0 : time,
+          cuisine: cuisine,
+          difficulty: difficulty
+        };
+    
+        Object.keys(params).forEach((key) => params[key] === undefined && delete params[key]);
+    
+        const response = await axios.get('http://localhost:8080/api/recipes/search', { params });
+    
+        setRecipes(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error searching recipes:', error);
+      }
+    };
+    
+    
+    
   const [recipes, setRecipes] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -58,7 +97,7 @@ const PopUp = ({ currentPage, handlePageChange }) => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.classList.add('modal-open'); // Add class to body
+    document.body.classList.add('modal-open'); 
   };
 
   const closeModal = () => {
@@ -72,13 +111,12 @@ const PopUp = ({ currentPage, handlePageChange }) => {
       imageUrl: '',
       cookingTime: 0,
     });
-    document.body.classList.remove('modal-open'); // Remove class from body
+    document.body.classList.remove('modal-open'); 
   };
 
   const truncateDescription = (description) => {
     const words = description.split(' ');
 
-    // Take the first two lines (assuming each line has a maximum of 10 words)
     const truncatedDescription = words.slice(0, 10).join(' ') + "...";
 
     return truncatedDescription;
@@ -88,8 +126,88 @@ const PopUp = ({ currentPage, handlePageChange }) => {
     <div className='wrapper'>
       <div className="recipe-container">
         <div className="header_wrapper">
-          {/*<a classNamem="add" href='#open-modal'><span>+</span></a>*/}
         </div>
+
+
+        <div className="filters">
+      <div className="filter-item search">
+        <label htmlFor="filter-search">Search</label>
+        <input
+          className="filter-select"
+          type="text"
+          name="filter-search"
+          id="filter-search"
+          autoComplete="off"
+          placeholder="Enter text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+
+      <div className="filter-item time">
+        <label htmlFor="time-input">Time:</label>
+        <div className="time-input-container">
+          <input
+            className="filter-select"
+            type="number"
+            name="time-input"
+            id="time-input"
+            autoComplete="off"
+            placeholder="Enter time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="filter-item area">
+        <label htmlFor="area-select">Cousine</label>
+        <select className="filter-select" name="area-select" id="area-select"
+        value={cuisine}
+        onChange={(e) => setCuisine(e.target.value)}>
+          <option value="">Cuisine</option>
+          <option className="filter-select-option" value="AMERICAN">AMERICAN</option>
+          <option className="filter-select-option" value="ITALIAN">ITALIAN</option>
+          <option className="filter-select-option" value="MEXICAN">MEXICAN</option>
+          <option className="filter-select-option" value="ASIAN">ASIAN</option>
+          <option className="filter-select-option" value="INDIAN">INDIAN</option>
+          <option className="filter-select-option" value="FRENCH">FRENCH</option>
+          <option className="filter-select-option" value="CHINESE">CHINESE</option>
+          <option className="filter-select-option" value="JAPANESE">JAPANESE</option>
+          <option className="filter-select-option" value="KOREAN">KOREAN</option>
+          <option className="filter-select-option" value="SPANISH">SPANISH</option>
+          <option className="filter-select-option" value="GERMAN">GERMAN</option>
+          <option className="filter-select-option" value="GREEK">GREEK</option>
+          <option className="filter-select-option" value="BRITISH">BRITISH</option>
+          <option className="filter-select-option" value="OTHER">OTHER</option>
+        </select>
+      </div>
+
+      <div className="filter-item ingredients">
+        <label htmlFor="ingredients-select">Level</label>
+        <select
+          className="filter-select"
+          name="ingredients-select"
+          id="ingredients-select"
+          value={difficulty}
+        onChange={(e) => setDifficulty(e.target.value)}
+        >
+          <option value="">Difficulty</option>
+          <option className="filter-select-option" value="EASY">EASY</option>
+          <option className="filter-select-option" value="INTERMEDIATE">INTERMEDIATE</option>
+          <option className="filter-select-option" value="ADVANCED">ADVANCED</option>
+        </select>
+      </div>
+      <div className="search-button">
+           
+          </div>
+        <button type="button" onClick={handleResetFilters} className="reset_btn">
+          Reset the filter
+        </button>
+    </div>
+
+
+
         <ul className='recipe_wrapper'>
           {recipes.map((recipe) => (
             <li
@@ -115,7 +233,7 @@ const PopUp = ({ currentPage, handlePageChange }) => {
           ))}
         </ul>
 
-        {/* Modal for displaying full recipe information */}
+       
         {selectedRecipe && (
           <div id={`recipe-modal-${selectedRecipe.id}`} className="modal">
             <div className="modal__content">
@@ -141,15 +259,7 @@ const PopUp = ({ currentPage, handlePageChange }) => {
           </div>
         )}
 
-        <div className="pag-wrap">
-          <div className="btns-pages">
-            {Array.from({ length: Math.ceil(recipes.length / ITEMS_PER_PAGE) }, (_, index) => (
-              <div key={index + 1} className="pag-page-btn pag-btn" onClick={() => handlePageChange(index + 1)}>
-                {index + 1}
-              </div>
-            ))}
-          </div>
-        </div>
+        
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { debounce } from 'debounce';
 import { createMarkupGridCard, defaultData } from './grid-card-fetch';
 import SlimSelect from 'slim-select';
-// import 'slim-select/dist/slimselect.css';
 
 let currentlimit = 6;
 
@@ -25,7 +24,7 @@ function getQueryNameRecipes(e) {
   console.log(inpunValue);
   if (inpunValue === '') {
     elements.searchInput.innerHTML = '';
-    elements.cards.innerHTML = defaultData(); // якщо написав і стер то вертається дефолтна розмітка
+    elements.cards.innerHTML = defaultData(); 
     elements.resetButton.classList.add('js-reset-filters');
     Notify.info('Your query is empty. Please try again');
     return;
@@ -63,7 +62,7 @@ async function cardsWithFiltersData(nameRecipe, currentlimit) {
 
     if (filterRecipes.length === 0) {
       elements.cards.innerHTML = defaultData();
-      // elements.resetButton.classList.add('js-reset-filters');
+      
       Notify.warning('Nothing was found for your request!');
       return;
     }
@@ -71,21 +70,10 @@ async function cardsWithFiltersData(nameRecipe, currentlimit) {
     const recipesOnPage = filterRecipes.splice(0, currentlimit);
     console.log(currentlimit);
 
-    // console.log(Math.ceil(filterRecipes.length/currentlimit));
-
-    // при реалізації пагінації можна опрацьювати filterRecipes після splice
+   
 
     elements.cards.innerHTML = createMarkupGridCard(recipesOnPage);
   } catch {
     Notify.failure('Oops! Something went wrong! Try reloading the page!');
   }
 }
-
-// selectClass.forEach(item => {
-// new SlimSelect({
-//   select: elements.allFilters,
-//   settings: {
-//     showSearch: false,
-//   },
-// });
-// });

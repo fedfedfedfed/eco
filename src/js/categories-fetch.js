@@ -5,8 +5,7 @@ categoriesData();
 async function categoriesData() {
   try {
     const result = await fetchCategories();
-    //console.log(result);
-    //elements.cards.innerHTML = createMarkupCategories(result);
+
   } catch {
     Notify.failure('Oops! Something went wrong! Try reloading the page!');
   }

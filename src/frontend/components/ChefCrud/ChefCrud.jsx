@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import './ChefCrud.css';
 import Header from '../Header/Header';
 
-const ChefCrud = () => {
+const ChefCrud = (props) => {
+  
   const [chef, setChefs] = useState([]);
   const [formData, setFormData] = useState({
     first_name: '',
@@ -117,7 +118,7 @@ const ChefCrud = () => {
   const truncateDescription = (description) => {
     const words = description.split(' ');
   
-    // Take the first two lines (assuming each line has a maximum of 10 words)
+   
     const truncatedDescription = words.slice(0, 10).join(' ') + "...";
   
     return truncatedDescription;
@@ -125,7 +126,7 @@ const ChefCrud = () => {
 
 return (
     <div className='wrapper'>
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
         <div className="header_wrapper">
           <div>
@@ -140,7 +141,7 @@ return (
               <a href="#" title="Close" className="modal-close">&#10006;</a>
   
               <form className="recipe-form" onSubmit={handleSubmit}>
-                {/* Форма для додавання шеф-кухаря */}
+                
                 <div className="form-group">
                   <label htmlFor="first_name">First Name:</label>
                   <input
@@ -152,7 +153,7 @@ return (
                     required
                   />
                 </div>
-                {/* Додайте інші поля форми, які вам потрібні */}
+               
                 <button type="submit">Add Chef</button>
               </form>
             </div>
@@ -164,7 +165,7 @@ return (
           <li key={chefx.id} className="recipe-card">
             <div className="recipe-details">
             <img src={chefx.imageUrl} alt={chefx.title} className="recipe-image" />
-              <h3 className="recipe_title">
+              <h3 className="recipe_title chef_title">
                 {chefx.firstName} {chefx.lastName}
               </h3>
               <p className='chef_email'><i className="far fa-envelope"></i> <span>{chefx.email}</span></p>

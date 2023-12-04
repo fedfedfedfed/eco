@@ -7,10 +7,10 @@
     background-color: #000;
   }
   .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
-    background-color: #000; /* Інший колір для неактивних крапок */
+    background-color: #000; 
   }
   
-  /* tablet break-point*/
+
   @media only screen and (min-width: 768px) {
     .swiper-horizontal
       > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
@@ -18,7 +18,7 @@
       transform: translateX(-100%);
     }
   }
-  /* desktop break-point*/
+
   @media only screen and (min-width: 1200px) {
     .swiper-horizontal
       > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,

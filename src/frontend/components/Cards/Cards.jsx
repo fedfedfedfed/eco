@@ -6,7 +6,7 @@ import PopUp from '../PopUp/PopUp';
 const Cards = () => {
   return (
     <div className="cards">
-      <Filters />
+      {/*<Filters />*/}
       <CardsGrid />
     </div>
   );

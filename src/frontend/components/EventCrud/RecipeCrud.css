@@ -81,10 +81,10 @@
   overflow: hidden;
 }
 
-/* Modify your existing .modal styles */
+
 .modal {
-  /* ... existing styles ... */
-  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+ 
+  overflow-y: auto; 
 }
 .modal_title {
   color: #050505;
@@ -92,7 +92,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 22px; /* 122.222% */
+  line-height: 22px; 
   text-transform: uppercase;
 }
 .modal {
@@ -129,13 +129,6 @@ height: 287px;
 
 
 
-/* SUMMARY 
-01. ROOT
-02. FONT
-03. GLOBAL STYLING
-04. HEADER
-
-*/
 
 /* ==== 01. ROOT ==== */
 :root {
@@ -172,7 +165,7 @@ button {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Put view recipe at the end of the container */
+  justify-content: space-between;
 }
 .recipe-card {
   width: 250px;
@@ -191,7 +184,7 @@ background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00)
 
 .recipe-image {
   height: 12rem;
-  width: 100%; /* extend the entire card with*/
+  width: 100%;
   object-fit: cover;
   transition: transform 200ms ease-in;
 }
@@ -205,11 +198,11 @@ background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00)
 .recipe-description {
    padding: 0 1rem;
 }
-/* Hover Effects */
 
 
 
-/* Red Delete Button */
+
+
 .delete-btn {
   padding: 0.5rem 1rem;
   font-family: inherit;
@@ -228,13 +221,13 @@ background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00)
   color: white;
 }
 
-/* Blue Update Button */
+
 .update-btn {
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid #2196f3; /* Blue color */
+  border: 2px solid #2196f3; 
   background: transparent;
   color: #2196f3;
   border-radius: 8px;
@@ -314,13 +307,13 @@ background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00)
   gap: 10px;
 }
 
-/* Your existing styles, add or modify as needed */
+
 
 .recipe-form {
   display: flex;
   flex-direction: column;
-  max-width: 400px; /* Adjust the maximum width as needed */
-  margin: auto; /* Center the form on the page */
+  max-width: 400px;
+  margin: auto; 
 }
 
 .form-group {
@@ -341,7 +334,7 @@ button {
 
 .clock-icon {
   margin-left: 8px;
-  color: #ccc; /* Color for the clock icon */
+  color: #ccc;
 }
 
 
@@ -395,7 +388,7 @@ textarea {
   .add_btn:hover {
     background-color: #45a049;
   }
-  /* Reset default styles */
+ 
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -404,19 +397,19 @@ select {
   text-overflow: '';
 }
 
-/* Styling the container */
+
 .dropdown-container {
   margin-bottom: 20px;
 }
 
-/* Styling the custom dropdown */
+
 .custom-dropdown {
   position: relative;
   display: inline-block;
   width: 200px;
 }
 
-/* Styling the select element */
+
 select {
   width: 100%;
   padding: 10px;
@@ -425,9 +418,7 @@ select {
   background-color: #fff;
   cursor: pointer;
 }
-/* ... previous styles ... */
 
-/* Styling the add button */
 .add {
   display: flex;
   align-items: center;
@@ -444,7 +435,7 @@ select {
   cursor: pointer;
   text-align: center;
 }
-/* Hover effect for the add button */
+
 .add:hover {
   background-color: #4ba357;
   color: #fff;
@@ -511,14 +502,14 @@ select {
 .cancel-btn {
   background-color: #e74c3c;
   color: #fff;
-  padding: 10px 15px; /* Adjust padding as needed */
+  padding: 10px 15px; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none; /* Remove default link styling */
+  text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-right: 10px; /* Add margin if needed */
+  margin-right: 10px;
 }
 .update_btns_wrapper {
   display: flex;
@@ -526,7 +517,7 @@ select {
   justify-content: space-between;
 }
 .cancel-btn:hover {
-  background-color: #c0392b; /* Darker red on hover */
+  background-color: #c0392b; 
 }
 .event_icons_wrapper {
   display: flex;

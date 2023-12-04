@@ -1,10 +1,10 @@
-// AddRecipe.js
+
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-const AddRecipe = () => {
+const AddRecipe = (props) => {
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
@@ -27,7 +27,7 @@ const AddRecipe = () => {
     if(validateInput()) {
     try {
       await axios.post('http://localhost:8080/api/recipes', formData);
-      navigate('/manage-recipes'); // Redirect to the recipes page after adding a recipe
+      navigate('/manage-recipes'); 
     } catch (error) {
       console.error('Error creating recipe:', error);
     }
@@ -37,12 +37,12 @@ const AddRecipe = () => {
     let isValid = true;
     const errors = {};
 
-    // Validate Title - only letters
+    
     if (!/^[A-Za-z\s]+$/.test(formData.title)) {
       isValid = false;
       errors.title = 'Only letters and spaces are allowed';
     }
-    // Validate Image URL - starts with http or https
+   
     if (!/^https?:\/\//.test(formData.imageUrl)) {
       isValid = false;
       errors.imageUrl = 'Image URL must start with http:// or https://';
@@ -53,7 +53,7 @@ const AddRecipe = () => {
   };
   return (
     <div className="add-recipe-container">
-        <Header />
+        <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <h2 className='recipes-title'>Add Recipe</h2>
       <form className="recipe-form" onSubmit={handleSubmit}>
       <div className="form-group">

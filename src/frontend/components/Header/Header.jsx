@@ -1,18 +1,42 @@
-// Header.js
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './header.css';
 import './forms.css';
 import { toggleTheme } from '../../redux/themeReducer';
 
+const Header = (props) => {
 
-const Header = () => {
+  useEffect(() => {
+
+    const token = localStorage.getItem('jwtToken');
+    console.log(token);
+    if (token) {
+
+      const decodedToken = decode(token);
+      console.log(decodedToken);
+      const role = decodedToken?.roles;
+      console.log(role); 
+      props.setUserRole(role);
+      console.log(props.userRole);
+    }
+  }, []);
+
+  const decode = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (error) {
+      return null;
+    }
+  };
+
   return (
     <header className="header">
       <div className="container header-wrraper">
         {<header className="header">
   <div className="container header-wrraper">
     <nav className="nav">
+    {props.userRole === 'ADMIN' ?
       <ul className="nav-list">
         <li className="nav-item">
           <a href="/" className="nav-link">Home</a>
@@ -21,14 +45,9 @@ const Header = () => {
           <a href="/manage-chefs" className="nav-link">Chef</a>
         </li>
         <li className="nav-item">
-          <a href="/manage-recipes" className="nav-link">Admin</a>
+          <a href="/manage-recipes" className="nav-link">Recipes</a>
         </li>
-        <li className="nav-item">
-          <a href="/login" className="nav-link">Login</a>
-        </li>
-        <li className="nav-item">
-          <a href="/register" className="nav-link">Register</a>
-        </li>
+        
         <li className="nav-item">
           <a href="/manage-video-tutorials" className="nav-link">Video Tutorials</a>
         </li>
@@ -41,7 +60,29 @@ const Header = () => {
         <li className="nav-item">
           <a href="/user" className="nav-link">Users</a>
         </li>
+        <li className="nav-item">
+        <a href="/login" className="nav-link">Login</a>
+      </li>
+      <li className="nav-item">
+        <a href="/register" className="nav-link">Register</a>
+      </li>
       </ul>
+ : <ul className="nav-list">
+    <li className="nav-item">
+      <a href="/" className="nav-link">Home</a>
+    </li>
+    <li className="nav-item">
+          <a href="/aboutus" className="nav-link">AboutUs</a>
+        </li>
+        
+        <li className="nav-item">
+        <a href="/login" className="nav-link">Login</a>
+      </li>
+      <li className="nav-item">
+        <a href="/register" className="nav-link">Register</a>
+      </li>
+      </ul>
+}
     </nav>
 
     <a href="./index.html" aria-label="logo">

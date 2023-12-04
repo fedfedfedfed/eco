@@ -115,13 +115,9 @@ const ChefAbout = () => {
           <div>
             <h1 className="recipes-title">Chefs</h1>
           </div>
-
-          <div id="open-modal" className="modal-window">
-            {/* ... (existing code) */}
-          </div>
         </div>
 
-        {/* Replace your existing list with the Slider component */}
+        
         <Slider {...sliderSettings} nextArrow={<NextArrow />} prevArrow={<PrevArrow />}>
           {chefs.map((chef) => (
             <div className="header_wrapper">

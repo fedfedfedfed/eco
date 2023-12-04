@@ -6,22 +6,14 @@ import HeroSection from '../components/HeroSection/HeroSection';
 import Recipes from '../components/Recipes/Recipes';
 import '../components/modern-normalize.css';
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <div className="App">
-      {/* Ваша компонента для шапки */}
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole} />
       
-      {/* Ваша компонента для категорій */}
       <HeroSection />
 
-      {/* Ваша компонента для популярних рецептів */}
       <Recipes />
-      
-      {/* Ваша компонента для фільтрів */}
-      {/*<ModalOrder />*/}
-      
-      {/* Ваша компонента для сітки рецептів */}
       
     </div>
   );

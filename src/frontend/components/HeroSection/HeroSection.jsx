@@ -3,12 +3,9 @@ import { useHistory, useNavigate } from 'react-router-dom';
 import './herosection.css';
 
 const HeroSection = () => {
-  // const history = useHistory();
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    // Redirect to the /login page
-    // history.push('/login');
     navigate('/login');
   };
 
@@ -30,7 +27,7 @@ const HeroSection = () => {
             className="hero-btn-order btn btn-outline"
             type="button"
             data-order-popup-open
-            onClick={handleLoginClick}  // Call the handleLoginClick function on button click
+            onClick={handleLoginClick}  
           >
             Log in
           </button>

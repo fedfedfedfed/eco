@@ -251,3 +251,6 @@
 .close-window {
     stroke: var(--colorTextDark);
 }
+.filters {
+    margin-bottom: 30px;
+}

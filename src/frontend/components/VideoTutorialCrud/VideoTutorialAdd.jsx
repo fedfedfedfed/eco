@@ -3,16 +3,17 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import './RecipeCrud.css'
-const VideoTutorialAdd = () => {
+const VideoTutorialAdd = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     videoUrl: '',
+    imageUrl: '',
   });
   const [validationErrors, setValidationErrors] = useState({
-    title: '',
     videoUrl: '',
+    imageUrl: '',
   });
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,11 +21,10 @@ const VideoTutorialAdd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-if (validateInput()) {
+    if(validateInput()) {
     try {
-      // Використовуємо URL для відеоуроків
       await axios.post('http://localhost:8080/api/video-tutorials', formData);
-      navigate('/manage-video-tutorials'); // Перенаправляємо на сторінку відеоуроків після додавання відеоуроку
+      navigate('/manage-video-tutorials'); 
     } catch (error) {
       console.error('Error creating video tutorial:', error);
     }
@@ -34,15 +34,13 @@ if (validateInput()) {
     let isValid = true;
     const errors = {};
 
-    // Validate Title - only letters
-    if (!/^[A-Za-z\s]+$/.test(formData.title)) {
-      isValid = false;
-      errors.title = 'Only letters and spaces are allowed';
-    }
-    // Validate Image URL - starts with http or https
     if (!/^https?:\/\//.test(formData.videoUrl)) {
       isValid = false;
-      errors.videoUrl = 'Image URL must start with http:// or https://';
+      errors.videoUrl = 'URL must start with http:// or https://';
+    }
+    if (!/^https?:\/\//.test(formData.imageUrl)) {
+      isValid = false;
+      errors.imageUrl = 'URL must start with http:// or https://';
     }
 
     setValidationErrors(errors);
@@ -50,7 +48,7 @@ if (validateInput()) {
   };
   return (
     <div className="add-recipe-container">
-      <Header />
+      <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
       <h2 className='recipes-title'>Add Video Tutorial</h2>
       <form className="recipe-form" onSubmit={handleSubmit}>
@@ -65,9 +63,7 @@ if (validateInput()) {
             required
           />
         </div>
-        {validationErrors.title && (
-            <div className="error-message">{validationErrors.title}</div>
-          )}
+
         <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
@@ -92,6 +88,20 @@ if (validateInput()) {
         </div>
         {validationErrors.videoUrl && (
             <div className="error-message">{validationErrors.videoUrl}</div>
+          )}
+        <div className="form-group">
+          <label htmlFor="imageUrl">Image URL:</label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value={formData.imageUrl}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        {validationErrors.imageUrl && (
+            <div className="error-message">{validationErrors.imageUrl}</div>
           )}
         <button className='add_btn' type="submit">Add Video Tutorial</button>
       </form>

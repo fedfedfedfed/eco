@@ -1,10 +1,10 @@
-// AddRecipe.js
+
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
-const UpdateRecipe = () => {
+const UpdateRecipe = (props) => {
     const { recipeId } = useParams();
     const navigate = useNavigate();
   
@@ -44,7 +44,7 @@ const UpdateRecipe = () => {
       try {
         const response = await axios.put(`http://localhost:8080/api/recipes`, formData);
         console.log(response.data);
-        navigate('/manage-recipes'); // Redirect to the recipes page after updating a recipe
+        navigate('/manage-recipes');
       } catch (error) {
         console.error('Error updating recipe:', error);
       }
@@ -54,13 +54,11 @@ const UpdateRecipe = () => {
       let isValid = true;
       const errors = {};
   
-      // Validate Title - only letters
       if (!/^[A-Za-z\s]+$/.test(formData.title)) {
         isValid = false;
         errors.title = 'Only letters and spaces are allowed';
       }
   
-      // Validate Image URL - starts with http or https
       if (!/^https?:\/\//.test(formData.imageUrl)) {
         isValid = false;
         errors.imageUrl = 'Image URL must start with http:// or https://';
@@ -72,7 +70,7 @@ const UpdateRecipe = () => {
   return (
     
     <div className="add-recipe-container">
-        <Header />
+        <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <h2 className='recipes-title'>Update Recipe</h2>
       <form className="recipe-form" onSubmit={handleUpdate}>
       <div className="form-group">

@@ -64,10 +64,10 @@
   overflow: hidden;
 }
 
-/* Modify your existing .modal styles */
+
 .modal {
-  /* ... existing styles ... */
-  overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+ 
+  overflow-y: auto; 
 }
 .modal_title {
   color: #050505;
@@ -75,7 +75,7 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 22px; /* 122.222% */
+  line-height: 22px; 
   text-transform: uppercase;
 }
 .modal {
@@ -106,14 +106,6 @@
 
 
 
-
-/* SUMMARY 
-01. ROOT
-02. FONT
-03. GLOBAL STYLING
-04. HEADER
-
-*/
 
 /* ==== 01. ROOT ==== */
 :root {
@@ -154,12 +146,6 @@ button {
 }
 
 
-
-/* Hover Effects */
-
-
-
-/* Red Delete Button */
 .delete-btn {
   padding: 0.5rem 1rem;
   font-family: inherit;
@@ -178,13 +164,12 @@ button {
   color: white;
 }
 
-/* Blue Update Button */
 .update-btn {
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid #2196f3; /* Blue color */
+  border: 2px solid #2196f3; 
   background: transparent;
   color: #2196f3;
   border-radius: 8px;
@@ -261,13 +246,12 @@ button {
   gap: 10px;
 }
 
-/* Your existing styles, add or modify as needed */
 
 .recipe-form {
   display: flex;
   flex-direction: column;
-  max-width: 400px; /* Adjust the maximum width as needed */
-  margin: auto; /* Center the form on the page */
+  max-width: 400px; 
+  margin: auto; 
 }
 
 .form-group {
@@ -288,7 +272,7 @@ button {
 
 .clock-icon {
   margin-left: 8px;
-  color: #ccc; /* Color for the clock icon */
+  color: #ccc; 
 }
 
 
@@ -342,7 +326,7 @@ textarea {
   .add_btn:hover {
     background-color: #45a049;
   }
-  /* Reset default styles */
+
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -351,19 +335,17 @@ select {
   text-overflow: '';
 }
 
-/* Styling the container */
 .dropdown-container {
   margin-bottom: 20px;
 }
 
-/* Styling the custom dropdown */
 .custom-dropdown {
   position: relative;
   display: inline-block;
   width: 200px;
 }
 
-/* Styling the select element */
+
 select {
   width: 100%;
   padding: 10px;
@@ -372,9 +354,7 @@ select {
   background-color: #fff;
   cursor: pointer;
 }
-/* ... previous styles ... */
 
-/* Styling the add button */
 .add {
   display: flex;
   align-items: center;
@@ -391,7 +371,7 @@ select {
   cursor: pointer;
   text-align: center;
 }
-/* Hover effect for the add button */
+
 .add:hover {
   background-color: #4ba357;
   color: #fff;
@@ -458,14 +438,14 @@ select {
 .cancel-btn {
   background-color: #e74c3c;
   color: #fff;
-  padding: 10px 15px; /* Adjust padding as needed */
+  padding: 10px 15px; 
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none; /* Remove default link styling */
+  text-decoration: none; 
   display: inline-block;
   font-size: 16px;
-  margin-right: 10px; /* Add margin if needed */
+  margin-right: 10px; 
 }
 .update_btns_wrapper {
   display: flex;
@@ -473,7 +453,7 @@ select {
   justify-content: space-between;
 }
 .cancel-btn:hover {
-  background-color: #c0392b; /* Darker red on hover */
+  background-color: #c0392b;
 }
 
 
@@ -482,7 +462,7 @@ select {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Put view recipe at the end of the container */
+    justify-content: space-between;
   }
   .recipe-card {
     width: 250px;
@@ -502,7 +482,7 @@ select {
   list-style: none;
   margin: 10px;
   padding: 0;
-  width: 300px; /* Регулюйте ширину картки за бажанням */
+  width: 300px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -512,16 +492,6 @@ select {
 .recipe-card:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
-
-
-
-
-
-
-
-
-
   
   .recipe-details {
     position: relative;
@@ -542,7 +512,7 @@ select {
     margin: 0;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Виводить три рядки тексту */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
   
