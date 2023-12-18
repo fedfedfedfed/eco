@@ -101,8 +101,7 @@ const EventAbout = () => {
           
 
         </div>
-
-        <Slider {...sliderSettings}>
+        <div className='wrap'>
           {events.map((event) => (
             <div className="header_wrapper">
             <div key={event.id} className="recipe-card">
@@ -124,7 +123,6 @@ const EventAbout = () => {
             </div>
             </div>
           ))}
-        </Slider>
         {selectedEvent && (
         <div id={`recipe-modal-${selectedEvent.id}`} className="modal">
           <div className="modal__content">
@@ -149,7 +147,7 @@ const EventAbout = () => {
           </div>
         </div>
       )}
-        
+        </div>
       </div>
     </div>
   );

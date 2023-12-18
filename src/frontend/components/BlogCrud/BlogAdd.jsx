@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-import './RecipeCrud.css'
-const VideoTutorialAdd = (props) => {
+import './BlogCrud.css'
+
+const BlogAdd = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    videoUrl: '',
+    tag: '',
+    createdBy: 'Admin',
+    commentsAmount: 0,
     imageUrl: '',
   });
   const [validationErrors, setValidationErrors] = useState({
-    videoUrl: '',
     imageUrl: '',
   });
   const handleInputChange = (e) => {
@@ -23,21 +25,16 @@ const VideoTutorialAdd = (props) => {
     e.preventDefault();
     if(validateInput()) {
     try {
-      await axios.post('http://localhost:8080/api/video-tutorials', formData);
-      navigate('/manage-video-tutorials'); 
+      await axios.post('http://localhost:8080/api/blogs', formData);
+      navigate('/manage-blogs'); 
     } catch (error) {
-      console.error('Error creating video tutorial:', error);
+      console.error('Error creating blog:', error);
     }
   }
   };
   const validateInput = () => {
     let isValid = true;
     const errors = {};
-
-    if (!/^https?:\/\//.test(formData.videoUrl)) {
-      isValid = false;
-      errors.videoUrl = 'URL must start with http:// or https://';
-    }
     if (!/^https?:\/\//.test(formData.imageUrl)) {
       isValid = false;
       errors.imageUrl = 'URL must start with http:// or https://';
@@ -50,7 +47,7 @@ const VideoTutorialAdd = (props) => {
     <div className="add-recipe-container">
       <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
-      <h2 className='recipes-title'>Add Video Tutorial</h2>
+      <h2 className='recipes-title'>Add Blog</h2>
       <form className="recipe-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
@@ -74,21 +71,6 @@ const VideoTutorialAdd = (props) => {
             required
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="videoUrl">Video URL:</label>
-          <input
-            type="text"
-            id="videoUrl"
-            name="videoUrl"
-            value={formData.videoUrl}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        {validationErrors.videoUrl && (
-            <div className="error-message">{validationErrors.videoUrl}</div>
-          )}
         <div className="form-group">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
@@ -103,11 +85,45 @@ const VideoTutorialAdd = (props) => {
         {validationErrors.imageUrl && (
             <div className="error-message">{validationErrors.imageUrl}</div>
           )}
-        <button className='add_btn' type="submit">Add Video Tutorial</button>
+        
+        <div className="form-group">
+          <label htmlFor="title">Tag:</label>
+          <input
+            type="text"
+            id="tag"
+            name="tag"
+            value={formData.tag}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Created By:</label>
+          <input
+            type="text"
+            id="createdBy"
+            name="createdBy"
+            value={formData.createdBy}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Comments Amount:</label>
+          <input
+            type="text"
+            id="commentsAmount"
+            name="commentsAmount"
+            value={formData.commentsAmount}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <button className='add_btn' type="submit">Add Blog</button>
       </form>
     </div>
     </div>
   );
 };
 
-export default VideoTutorialAdd;
+export default BlogAdd;

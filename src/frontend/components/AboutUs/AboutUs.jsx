@@ -2,28 +2,47 @@ import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import ChefAbout from './ChefAbout';
 import './AboutUs.css';
-import VideoAdd from './VideoAbout';
+import VideoAdd from './BlogAbout';
 import EventAbout from './EventAbout';
-import '../EventCrud/RecipeCrud.css';
-
+import '../EventCrud/EventCrud.css';
+import BlogAbout from './BlogAbout';
+import TestimonialsAbout from './TestimonialsAbout';
 const AboutUs = (props) => {
     return(
         <div>
         <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
-        <div class="hero-title centered">
-    <h1 className='about_h'>About <span className='span'>Tasty Treats</span></h1>
-    <p className='about_text'>Welcome to <span className='span'>TastyTreats</span>, where passion for food meets exceptional taste. We are more than just a brand; we are a culinary journey, crafting delightful experiences for your palate.</p>
-    
-    <p className='aboutp'><span className='ourspan'>Our</span> Story:</p>
-    <p className='about_text'>Founded with a love for authentic flavors and a commitment to quality, <span className='span'>TastyTreats</span> has been serving culinary delights that resonate with food enthusiasts worldwide. From traditional recipes passed down through generations to innovative creations, our menu is a celebration of diverse tastes and textures.</p>
+        <div className="about-us-container">
+      <h1 className='dich_header'>About Our Fresh Vegetables</h1>
+      <p className='dich'>
+        Welcome to Fresh Veggie Market! We are passionate about providing you with the freshest and
+        highest quality vegetables. Our mission is to promote healthy living and sustainable farming
+        practices.
+      </p>
+      <p className='dich'>
+        At Fresh Veggie Market, we work directly with local farmers who share our commitment to
+        organic and pesticide-free produce. We believe in supporting local communities and delivering
+        farm-fresh goodness to your doorstep.
+      </p>
+      <p className='dich'>
+        Our dedicated team ensures that every vegetable you receive is carefully selected and
+        delivered with the utmost care. Whether you're a cooking enthusiast or someone looking for
+        healthier food options, we have a wide variety of vegetables to meet your needs.
+      </p>
+      <p className='dich'>
+        Thank you for choosing Fresh Veggie Market. Join us in our journey towards a healthier,
+        happier, and more sustainable lifestyle.
+      </p>
     </div>
     <br/>
         <ChefAbout/>
         <br/>
-        <VideoAdd/>
+        <BlogAbout/>
         <br/>
         <EventAbout/>
+        <br />
+        <TestimonialsAbout/>
         </div>
+
     )
 };
 export default AboutUs;

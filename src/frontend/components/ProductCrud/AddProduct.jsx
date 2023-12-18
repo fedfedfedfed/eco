@@ -4,15 +4,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-const AddRecipe = (props) => {
+const AddProduct = (props) => {
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    cousine: '',
-    difficultyLevel: '',
     imageUrl: '',
-    cookingTime: 0,
+    price: 0.0,
+    isAvailable: false,
   });
   const [validationErrors, setValidationErrors] = useState({
     title: '',
@@ -26,10 +25,10 @@ const AddRecipe = (props) => {
     e.preventDefault();
     if(validateInput()) {
     try {
-      await axios.post('http://localhost:8080/api/recipes', formData);
-      navigate('/manage-recipes'); 
+      await axios.post('http://localhost:8080/api/products', formData);
+      navigate('/manage-products'); 
     } catch (error) {
-      console.error('Error creating recipe:', error);
+      console.error('Error creating product:', error);
     }
   }
   };
@@ -54,7 +53,7 @@ const AddRecipe = (props) => {
   return (
     <div className="add-recipe-container">
         <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
-      <h2 className='recipes-title'>Add Recipe</h2>
+      <h2 className='recipes-title'>Add Product</h2>
       <form className="recipe-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="title">Title:</label>
@@ -79,56 +78,22 @@ const AddRecipe = (props) => {
           onChange={handleInputChange}
           required
         />
-      </div>
-
-
-      <div className="form-group">
-  <label htmlFor="cuisine">Cuisine:</label>
-  <div className="custom-dropdown">
-    <select
-      id="cuisine"
-      name="cousine"
-      value={formData.cousine}
-      onChange={handleInputChange}
-      required
-    >
-      <option value="">Select Cuisine</option>
-      <option value="AMERICAN">AMERICAN</option>
-      <option value="ITALIAN">ITALIAN</option>
-      <option value="MEXICAN">MEXICAN</option>
-      <option value="ASIAN">ASIAN</option>
-      <option value="INDIAN">INDIAN</option>
-      <option value="FRENCH">FRENCH</option>
-      <option value="CHINESE">CHINESE</option>
-      <option value="JAPANESE">JAPANESE</option>
-      <option value="KOREAN">KOREAN</option>
-      <option value="GREEK">GREEK</option>
-      <option value="SPANISH">SPANISH</option>
-      <option value="GERMAN">GERMAN</option>
-      <option value="BRITISH">BRITISH</option>
-      <option value="OTHER">OTHER</option>
-    </select>
-  </div>
-</div>
-
-
-      
+      </div>      
 
       <div className="form-group">
 
       <div className="dropdown-container">
-        <label htmlFor="dropdown">Difficulty Level:</label>
+        <label htmlFor="dropdown">Availability</label>
         <div className="custom-dropdown">
           <select 
-          id="difficultyLevel"
-          name="difficultyLevel"
-          value={formData.difficultyLevel}
+          id="isAvailable"
+          name="isAvailable"
+          value={formData.isAvailable}
           onChange={handleInputChange}
           required>
-            <option value="">Select Difficulty</option>
-            <option value="EASY">EASY</option>
-          <option value="INTERMEDIATE">INTERMEDIATE</option>
-          <option value="ADVANCED">ADVANCED</option>
+            <option value="">Select Availability</option>
+            <option value="EASY">true</option>
+          <option value="INTERMEDIATE">false</option>
           </select>
         </div>
       </div>
@@ -137,16 +102,16 @@ const AddRecipe = (props) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="cookingTime">Cooking Time:</label>
+        <label htmlFor="price">Price</label>
         <input
           type="number"
-          id="cookingTime"
-          name="cookingTime"
-          value={formData.cookingTime}
+          id="price"
+          name="price"
+          value={formData.price}
           onChange={handleInputChange}
           required
-          min="1"
-          max="180"
+          min="0.01"
+          step="0.01"
         />
       </div>
 
@@ -164,13 +129,13 @@ const AddRecipe = (props) => {
       {validationErrors.imageUrl && (
             <div className="error-message">{validationErrors.imageUrl}</div>
           )}
-      <button className='add_btn' type="submit">Add Recipe</button>
+      <button className='add_btn' type="submit">Add Product</button>
     </form>
     </div>
   );
 };
 
-export default AddRecipe;
+export default AddProduct;
 
 
 

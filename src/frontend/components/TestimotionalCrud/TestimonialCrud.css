@@ -2,18 +2,37 @@
 /* Import this line in your stylesheet */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-
-.video-placeholder {
-  position: absolute;
-  top: 33%;
-  left: 47%;
-}
-.video-placeholder-wrapper .modal-image {
-  position: relative;
-}
-svg:hover {
-  fill: #9BB537;
-}
+.form-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+  .chef_title {
+    padding: 10px 0;
+  }
+  .recipe-title {
+    padding-top: 1rem;
+    padding-bottom: 1rem !important;
+  }
+  .chef-info div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .chef_exp {
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .chef_email {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 21px;
+  }
 .modal {
   visibility: hidden;
   opacity: 0;
@@ -91,11 +110,25 @@ svg:hover {
   color: #fff;
 }
 .modal-open {
-  overflow: hidden;
+  overflow: auto;
 }
 
-.modal {
-  overflow-y: auto; 
+.review-foto {
+  border-radius: 50%;
+  width: 50px;
+  height: auto;
+}
+.wr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.role {
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
 }
 .modal_title {
   color: #050505;
@@ -103,7 +136,7 @@ svg:hover {
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 22px; 
   text-transform: uppercase;
 }
 .modal {
@@ -144,6 +177,10 @@ height: 287px;
 
 
 
+
+
+
+
 /* ==== 01. ROOT ==== */
 :root {
   --clr-primary: #d50000;
@@ -179,13 +216,12 @@ button {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
 
 .recipe-image {
-  height: 12rem;
-  width: 100%; 
+  width: 100%;
   object-fit: cover;
   transition: transform 200ms ease-in;
 }
@@ -208,6 +244,7 @@ button {
    transform: translateY(-1rem);
    transition: all 0.5s ease-in-out;
 }
+
 
 .delete-btn {
   padding: 0.5rem 1rem;
@@ -233,7 +270,7 @@ button {
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid #2196f3; /* Blue color */
+  border: 2px solid #2196f3;
   background: transparent;
   color: #2196f3;
   border-radius: 8px;
@@ -256,6 +293,13 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: center;
   gap: 50px;
+  justify-items: center;
+}
+.test_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 100px;
   justify-items: center;
 }
 .wrapper {
@@ -314,12 +358,11 @@ button {
 }
 
 
-
 .recipe-form {
   display: flex;
   flex-direction: column;
   max-width: 400px; 
-  margin: auto; 
+  margin: auto;
 }
 
 .form-group {
@@ -394,7 +437,6 @@ textarea {
   .add_btn:hover {
     background-color: #576912;
   }
-
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -402,7 +444,6 @@ select {
   text-indent: 1px;
   text-overflow: '';
 }
-
 
 .dropdown-container {
   margin-bottom: 20px;
@@ -429,10 +470,10 @@ select {
   justify-content: center;
   position: relative;
   transform: translateY(-50%);
-  background-color: #51cf66;
+  background-color: #585858;
   color: #fff;
   border: none;
-  border-radius: 50%;
+  border-radius: 10px;
   width: 30px;
   height: 30px;
   font-size: 16px;
@@ -441,7 +482,7 @@ select {
 }
 
 .add:hover {
-  background-color: #4ba357;
+  background-color: #6b7e86;
   color: #fff;
 }
 .header_wrapper {
@@ -510,7 +551,7 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin-right: 10px; 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../ChefCrud/ChefCrud.css';
+import '../TeamMemberCrud/TeamMember.css';
 
 const ChefAbout = () => {
   const [chefs, setChefs] = useState([]);
@@ -44,7 +44,7 @@ const ChefAbout = () => {
 
   const fetchChefs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/chefs');
+      const response = await axios.get('http://localhost:8080/api/team-members');
       setChefs(response.data);
     } catch (error) {
       console.error('Error fetching chefs:', error);
@@ -59,7 +59,7 @@ const ChefAbout = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8080/api/chefs', formData);
+      await axios.post('http://localhost:8080/api/team-members', formData);
       fetchChefs();
       setFormData({
         first_name: '',
@@ -113,12 +113,10 @@ const ChefAbout = () => {
       <div className="recipe-container">
         <div className="header_wrapper">
           <div>
-            <h1 className="recipes-title">Chefs</h1>
+            <h1 className="recipes-title">Team Members</h1>
           </div>
         </div>
-
-        
-        <Slider {...sliderSettings} nextArrow={<NextArrow />} prevArrow={<PrevArrow />}>
+        <div className='wrap'>
           {chefs.map((chef) => (
             <div className="header_wrapper">
             <div key={chef.id} className="recipe-card">
@@ -144,7 +142,7 @@ const ChefAbout = () => {
             
             </div>
           ))}
-        </Slider>
+          </div>
         <div className="content-spacing" style={{ marginTop: '20px' }} />
 
         {selectedChef && (

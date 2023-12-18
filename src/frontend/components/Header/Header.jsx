@@ -42,14 +42,14 @@ const Header = (props) => {
           <a href="/" className="nav-link">Home</a>
         </li>
         <li className="nav-item">
-          <a href="/manage-chefs" className="nav-link">Chef</a>
+          <a href="/manage-team-members" className="nav-link">Team Members</a>
         </li>
         <li className="nav-item">
-          <a href="/manage-recipes" className="nav-link">Recipes</a>
+          <a href="/manage-products" className="nav-link">Products</a>
         </li>
         
         <li className="nav-item">
-          <a href="/manage-video-tutorials" className="nav-link">Video Tutorials</a>
+          <a href="/manage-blogs" className="nav-link">Blogs</a>
         </li>
         <li className="nav-item">
           <a href="/manage-events" className="nav-link">Events</a>
@@ -58,14 +58,8 @@ const Header = (props) => {
           <a href="/aboutus" className="nav-link">AboutUs</a>
         </li>
         <li className="nav-item">
-          <a href="/user" className="nav-link">Users</a>
+          <a href="/manage-testimonials" className="nav-link">Testimonials</a>
         </li>
-        <li className="nav-item">
-        <a href="/login" className="nav-link">Login</a>
-      </li>
-      <li className="nav-item">
-        <a href="/register" className="nav-link">Register</a>
-      </li>
       </ul>
  : <ul className="nav-list">
     <li className="nav-item">
@@ -73,7 +67,7 @@ const Header = (props) => {
     </li>
     <li className="nav-item">
           <a href="/aboutus" className="nav-link">AboutUs</a>
-        </li>
+    </li>
         
         <li className="nav-item">
         <a href="/login" className="nav-link">Login</a>

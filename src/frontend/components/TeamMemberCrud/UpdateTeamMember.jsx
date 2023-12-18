@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 
-const UpdateChef = (props) => {
-    const { chefId } = useParams();
+const UpdateTeamMember = (props) => {
+    const { teamMemberId } = useParams();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const UpdateChef = (props) => {
     useEffect(() => {
         const fetchChef = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/chefs/${chefId}`);
+                const response = await axios.get(`http://localhost:8080/api/team-members/${teamMemberId}`);
                 setFormData(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -37,7 +37,7 @@ const UpdateChef = (props) => {
         };
 
         fetchChef();
-    }, [chefId]);
+    }, [teamMemberId]);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,9 +47,9 @@ const UpdateChef = (props) => {
         e.preventDefault();
         if (validateInput()){
       try {
-        const response = await axios.put(`http://localhost:8080/api/chefs`, formData);
+        const response = await axios.put(`http://localhost:8080/api/team-members`, formData);
         console.log(response.data);
-        navigate('/manage-chefs'); 
+        navigate('/manage-team-members'); 
       } catch (error) {
         console.error('Error updating chef:', error);
       }
@@ -101,7 +101,7 @@ const UpdateChef = (props) => {
     return (
         <div className="recipe-chef-container">
             <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
-            <h2 className='recipe-title'>Update Chef</h2>
+            <h2 className='update_team_title'>Update Team Member</h2>
             <form className="recipe-form" onSubmit={handleUpdate}>
                 <div className="form-group">
                     <label htmlFor="firstName">First Name:</label>
@@ -160,7 +160,7 @@ const UpdateChef = (props) => {
             <div className="error-message">{validationErrors.phoneNumber}</div>
           )}
                 <div className="form-group">
-                    <label htmlFor="experience">Experience:</label>
+                    <label htmlFor="experience">Age:</label>
                     <input
                         type="number"
                         id="experience"
@@ -168,7 +168,8 @@ const UpdateChef = (props) => {
                         value={formData.experience}
                         onChange={handleInputChange}
                         required
-                        min="0"
+                        min={18}
+                        max={65}
                     />
                 </div>
                 {validationErrors.experience && (
@@ -199,16 +200,16 @@ const UpdateChef = (props) => {
             <div className="error-message">{validationErrors.imageUrl}</div>
           )}
                 <div className='update_btns_wrapper'>
-                    <Link to={`/manage-chefs`} className="update">
+                    <Link to={`/manage-team-members`} className="update">
                         <button type="button" className='cancel-btn'>
                             Cancel
                         </button>
                     </Link>
-                    <button className='update_btn' type="submit">Update Chef</button>
+                    <button className='update_btn' type="submit">Update Team Member</button>
                 </div>
             </form>
         </div>
     );
 };
 
-export default UpdateChef;
+export default UpdateTeamMember;

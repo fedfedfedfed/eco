@@ -2,7 +2,42 @@
 /* Import this line in your stylesheet */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
-
+.form-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+  .chef_title {
+    padding: 10px 0;
+  }
+  .recipe-title {
+    padding-top: 1rem;
+    padding-bottom: 1rem !important;
+  }
+  .chef-info div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .chef_exp {
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .team_years {
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .chef_email {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 21px;
+  }
 .modal {
   visibility: hidden;
   opacity: 0;
@@ -57,19 +92,40 @@
   margin-bottom: 20px;
   text-align: center;
 }
-
-
-
+.recipe-card, .team-card {
+  width: 312px !important;
+}
+.see-more {
+  text-align: center;
+  margin: 10px;
+  display: block;
+  border-radius: 8px;
+  background: #9BB537;
+  padding: 10px 15px;
+  color: #fff;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.see-more:hover {
+  background: #677a1d;
+  transition: all 0.7s ease-in-out;
+  color: #fff;
+}
 .modal-open {
   overflow: hidden;
 }
 
-
-.modal {
- 
-  overflow-y: auto; 
+.team_email {
+  margin-left: 10px;
 }
-.modal_title {
+
+.team_title {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
   color: #050505;
   font-family: Inter;
   font-size: 18px;
@@ -78,6 +134,10 @@
   line-height: 22px; 
   text-transform: uppercase;
 }
+.team_description {
+  margin-top: 10px;
+  margin-left: 10px;
+}
 .modal {
   padding: 20px;
 }
@@ -85,6 +145,14 @@
   border-radius: 8px;
   width: 467px;
   height: 250px;
+  flex-shrink: 0;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.modal-image-team {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
   flex-shrink: 0;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -98,11 +166,23 @@
   font-weight: 400;
   line-height: 18px;
 }
-
-
+.recipe-card, .team-card {
+border-radius: 8px;
+background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00) 108.72%),
+}
+.recipe-image {
+  width: 312px;
+  height: 287px;
+  display: block;
+  object-fit: cover;
+}
 .recipes-wrapper {
   display: flex;
 }
+
+
+
+
 
 
 
@@ -137,12 +217,39 @@ button {
 }
 
 
+.recipe-card, .team-card {
+  box-shadow: 0px 2px 20px var(--clr-gray200);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
 
 
-
-
+.recipe-image {
+  height: 12rem;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 200ms ease-in;
+}
 .wrapper {
   height: 100%;
+}
+.recipe_title {
+    color:#050505;
+    font-weight: bold;
+  padding: 1rem;
+}
+
+.recipe-description {
+   padding: 0 1rem;
+}
+
+
+.recipe-card:hover, .team-card:hover {
+   transform: scale(1.02);
+   transform: translateY(-1rem);
+   transition: all 0.5s ease-in-out;
 }
 
 
@@ -159,26 +266,27 @@ button {
   transition: background 200ms ease-in, color 200ms ease-in;
 }
 
-.delete-btn:hover {
-  background: #e53935;
-  color: white;
+.delete-btn {
+  background: #e53935 !important;
+  color: white !important;
 }
+
 
 .update-btn {
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid #2196f3; 
+  border: 2px solid #2196f3;
   background: transparent;
   color: #2196f3;
   border-radius: 8px;
   transition: background 200ms ease-in, color 200ms ease-in;
 }
 
-.update-btn:hover {
-  background: #2196f3;
-  color: white;
+.update-btn {
+  background: #2196f3 !important;
+  color: white !important;
 }
 .crud_btns {
   display: flex;
@@ -194,12 +302,27 @@ button {
   gap: 50px;
   justify-items: center;
 }
+.update_team_title {
+  text-align: center;
+}
+.team_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 100px;
+  justify-items: center;
+}
 .wrapper {
   max-width: calc(100vw - 10%);
   margin: 0 auto;
 }
-
-
+.recipe-card{
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.team-card {
+  border: 1px solid #ddd;
+}
 @media (max-width: 600px) {
   .recipe_wrapper {
     grid-template-columns: 1fr;
@@ -251,7 +374,7 @@ button {
   display: flex;
   flex-direction: column;
   max-width: 400px; 
-  margin: auto; 
+  margin: auto;
 }
 
 .form-group {
@@ -305,7 +428,7 @@ textarea {
   resize: vertical;
 }
 .add_btn {
-    background-color: #4caf50;
+    background-color: #9BB537;
     color: white;
     padding: 10px;
     border: none;
@@ -324,9 +447,8 @@ textarea {
     background-color: #1f5e92;
   }
   .add_btn:hover {
-    background-color: #45a049;
+    background-color: #576912;
   }
-
 select {
   appearance: none;
   -webkit-appearance: none;
@@ -345,7 +467,6 @@ select {
   width: 200px;
 }
 
-
 select {
   width: 100%;
   padding: 10px;
@@ -360,11 +481,11 @@ select {
   align-items: center;
   justify-content: center;
   position: relative;
-  transform: translateY(-50%);
-  background-color: #51cf66;
+  
+  background-color: #585858;
   color: #fff;
   border: none;
-  border-radius: 50%;
+  border-radius: 10px;
   width: 30px;
   height: 30px;
   font-size: 16px;
@@ -373,7 +494,7 @@ select {
 }
 
 .add:hover {
-  background-color: #4ba357;
+  background-color: #6b7e86;
   color: #fff;
 }
 .header_wrapper {
@@ -442,7 +563,7 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin-right: 10px; 
@@ -456,77 +577,3 @@ select {
   background-color: #c0392b;
 }
 
-
-.recipe-card {
-    box-shadow: 0px 2px 20px var(--clr-gray200);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .recipe-card {
-    width: 250px;
-  border-radius: 8px;
-  background: linear-gradient(1deg, rgba(5, 5, 5, 0.60) 4.82%, rgba(5, 5, 5, 0.00) 108.72%),
-  }
-  .recipe-card:hover {
-    transform: scale(1.02);
-    transform: translateY(-1rem);
-    transition: all 0.5s ease-in-out;
-  }
-  .recipe-card{
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
-  .recipe-card {
-  list-style: none;
-  margin: 10px;
-  padding: 0;
-  width: 300px; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.recipe-card:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-  
-  .recipe-details {
-    position: relative;
-  }
-  
-  .recipe-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px 8px 0 0;
-  }
-  
-  .recipe_title {
-    font-weight: bold;
-    margin: 10px 0;
-  }
-  
-  .recipe-description {
-    margin: 0;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  
-  .see-more {
-    display: block;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 0 0 8px 8px;
-  }
-  
-  .see-more:hover {
-    background-color: #0056b3;
-  }
-  

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-import './RecipeCrud.css';
+import './EventCrud.css';
 
 const AddEvent = (props) => {
   const navigate = useNavigate();

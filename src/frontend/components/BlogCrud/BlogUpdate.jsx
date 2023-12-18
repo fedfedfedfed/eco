@@ -3,32 +3,33 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 
-const VideoTutorialUpdate = (props) => {
-  const { video_tutorialId } = useParams();
+const BlogUpdate = (props) => {
+  const { blogId } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    videoUrl: '',
+    tag: '',
+    createdBy: 'Admin',
+    commentsAmount: 0,
     imageUrl: '',
   });
   const [validationErrors, setValidationErrors] = useState({
-    videoUrl: '',
     imageUrl: '',
   });
   useEffect(() => {
     const fetchVideoTutorials = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/video-tutorials/${video_tutorialId}`);
+        const response = await axios.get(`http://localhost:8080/api/blogs/${blogId}`);
         setFormData(response.data);
       } catch (error) {
-        console.error('Error fetching video tutorial:', error);
+        console.error('Error fetching blog:', error);
       }
     };
 
     fetchVideoTutorials();
-  }, [video_tutorialId]);
+  }, [blogId]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,9 +39,9 @@ const VideoTutorialUpdate = (props) => {
     if(validateInput()) {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8080/api/video-tutorials`, formData);
+      const response = await axios.put(`http://localhost:8080/api/blogs`, formData);
       console.log(response.data);
-      navigate('/manage-video-tutorials');
+      navigate('/manage-blogs');
     } catch (error) {
       console.error('Error updating recipe:', error);
     }
@@ -49,11 +50,6 @@ const VideoTutorialUpdate = (props) => {
   const validateInput = () => {
     let isValid = true;
     const errors = {};
-
-    if (!/^https?:\/\//.test(formData.videoUrl)) {
-      isValid = false;
-      errors.videoUrl = 'URL must start with http:// or https://';
-    }
 
     if (!/^https?:\/\//.test(formData.imageUrl)) {
       isValid = false;
@@ -90,20 +86,7 @@ const VideoTutorialUpdate = (props) => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="videoUrl">Video URL:</label>
-          <input
-            type="text"
-            id="videoUrl"
-            name="videoUrl"
-            value={formData.videoUrl}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        {validationErrors.videoUrl && (
-            <div className="error-message">{validationErrors.videoUrl}</div>
-          )}
+
         <div className="form-group">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
@@ -118,8 +101,41 @@ const VideoTutorialUpdate = (props) => {
         {validationErrors.imageUrl && (
             <div className="error-message">{validationErrors.imageUrl}</div>
           )}
+          <div className="form-group">
+          <label htmlFor="title">Tag:</label>
+          <input
+            type="text"
+            id="tag"
+            name="tag"
+            value={formData.tag}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Created By:</label>
+          <input
+            type="text"
+            id="createdBy"
+            name="createdBy"
+            value={formData.createdBy}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="title">Comments Amount:</label>
+          <input
+            type="text"
+            id="commentsAmount"
+            name="commentsAmount"
+            value={formData.commentsAmount}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
         <div className='update_btns_wrapper'>
-          <Link to={`/manage-video-tutorials`} className="update">
+          <Link to={`/manage-blogs`} className="update">
             <button type="button" className='cancel-btn'>
               Cancel
             </button>
@@ -133,4 +149,4 @@ const VideoTutorialUpdate = (props) => {
   );
 };
 
-export default VideoTutorialUpdate;
+export default BlogUpdate;

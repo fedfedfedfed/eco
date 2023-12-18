@@ -4,35 +4,34 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
-const UpdateRecipe = (props) => {
-    const { recipeId } = useParams();
+const UpdateProduct = (props) => {
+    const { productId } = useParams();
     const navigate = useNavigate();
   
     const [formData, setFormData] = useState({
       title: '',
       description: '',
-      cousine: '',
-      difficultyLevel: '',
       imageUrl: '',
-      cookingTime: 0,
+      price: 0.0,
+      isAvailable: false,
     });
     const [validationErrors, setValidationErrors] = useState({
       title: '',
       imageUrl: '',
     });
     useEffect(() => {
-      const fetchRecipe = async () => {
+      const fetchProduct = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/api/recipes/${recipeId}`);
+          const response = await axios.get(`http://localhost:8080/api/products/${productId}`);
           setFormData(response.data);
           console.log(response.data);
         } catch (error) {
-          console.error('Error fetching recipe:', error);
+          console.error('Error fetching product:', error);
         }
       };
   
-      fetchRecipe();
-    }, [recipeId]);
+      fetchProduct();
+    }, [productId]);
   
     const handleInputChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,11 +41,11 @@ const UpdateRecipe = (props) => {
         e.preventDefault();
         if (validateInput()) {
       try {
-        const response = await axios.put(`http://localhost:8080/api/recipes`, formData);
+        const response =  await axios.put(`http://localhost:8080/api/products`, formData);
         console.log(response.data);
-        navigate('/manage-recipes');
+        navigate('/manage-products');
       } catch (error) {
-        console.error('Error updating recipe:', error);
+        console.error('Error updating product:', error);
       }
     }
     };
@@ -71,7 +70,7 @@ const UpdateRecipe = (props) => {
     
     <div className="add-recipe-container">
         <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
-      <h2 className='recipes-title'>Update Recipe</h2>
+      <h2 className='recipes-title'>Update Product</h2>
       <form className="recipe-form" onSubmit={handleUpdate}>
       <div className="form-group">
         <label htmlFor="title">Title:</label>
@@ -98,74 +97,41 @@ const UpdateRecipe = (props) => {
         />
       </div>
 
-
       <div className="form-group">
-  <label htmlFor="cuisine">Cuisine:</label>
+
+<div className="dropdown-container">
+  <label htmlFor="dropdown">Availability</label>
   <div className="custom-dropdown">
-    <select
-      id="cuisine"
-      name="cousine"
-      value={formData.cousine}
-      onChange={handleInputChange}
-      required
-    >
-      <option value="">Select Cuisine</option>
-      <option value="AMERICAN">AMERICAN</option>
-      <option value="ITALIAN">ITALIAN</option>
-      <option value="MEXICAN">MEXICAN</option>
-      <option value="ASIAN">ASIAN</option>
-      <option value="INDIAN">INDIAN</option>
-      <option value="FRENCH">FRENCH</option>
-      <option value="CHINESE">CHINESE</option>
-      <option value="JAPANESE">JAPANESE</option>
-      <option value="KOREAN">KOREAN</option>
-      <option value="GREEK">GREEK</option>
-      <option value="SPANISH">SPANISH</option>
-      <option value="GERMAN">GERMAN</option>
-      <option value="BRITISH">BRITISH</option>
-      <option value="OTHER">OTHER</option>
+    <select 
+    id="isAvailable"
+    name="isAvailable"
+    value={formData.isAvailable}
+    onChange={handleInputChange}
+    required>
+      <option value="">Select Availability</option>
+      <option value="EASY">True</option>
+    <option value="INTERMEDIATE">False</option>
     </select>
   </div>
 </div>
 
+  
+</div>
 
-      
+<div className="form-group">
+  <label htmlFor="price">Price</label>
+  <input
+    type="number"
+    id="price"
+    name="price"
+    value={formData.price}
+    onChange={handleInputChange}
+    required
+    min="0.01"
+    step="0.01"
+  />
+</div>
 
-      <div className="form-group">
-
-      <div className="dropdown-container">
-        <label htmlFor="dropdown">Difficulty Level:</label>
-        <div className="custom-dropdown">
-          <select 
-          id="difficultyLevel"
-          name="difficultyLevel"
-          value={formData.difficultyLevel}
-          onChange={handleInputChange}
-          required>
-            <option value="">Select Difficulty</option>
-            <option value="EASY">EASY</option>
-          <option value="INTERMEDIATE">INTERMEDIATE</option>
-          <option value="ADVANCED">ADVANCED</option>
-          </select>
-        </div>
-      </div>
-
-        
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="cookingTime">Cooking Time:</label>
-        <input
-          type="number"
-          id="cookingTime"
-          name="cookingTime"
-          value={formData.cookingTime}
-          onChange={handleInputChange}
-          required
-          min="1"
-          max="180"
-        />
-      </div>
 
       <div className="form-group">
         <label htmlFor="imageUrl">Image URL:</label>
@@ -182,19 +148,19 @@ const UpdateRecipe = (props) => {
             <div className="error-message">{validationErrors.imageUrl}</div>
           )}
       <div className='update_btns_wrapper'>
-      <Link to={`/manage-recipes`} className="update">
+      <Link to={`/manage-products`} className="update">
               <button type="button" className='cancel-btn'>
                 Cancel
               </button>
             </Link>
-      <button className='update_btn' type="submit">Update Recipe</button>
+      <button className='update_btn' type="submit">Update Product</button>
       </div>
     </form>
     </div>
   );
 };
 
-export default UpdateRecipe;
+export default UpdateProduct;
 
 
 

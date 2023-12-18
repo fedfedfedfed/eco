@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './RecipeCrud.css';
+import './EventCrud.css';
 import Header from '../Header/Header';
 
 const EventCrud = (props) => {
@@ -142,12 +142,13 @@ const EventCrud = (props) => {
       <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
         <div className="header_wrapper">
+        <Link to="/manage-events/add-event" className="add">
+            <span>+</span>
+          </Link>
           <div>
             <h1 className='recipe-title'>Events</h1>
           </div>
-          <Link to="/manage-events/add-event" className="add">
-            <span>+</span>
-          </Link>
+          
 
           <div id="recipe-modal" className="modal-window">
             <div>
@@ -158,7 +159,7 @@ const EventCrud = (props) => {
             </div>
           </div>
         </div>
-        <ul className='recipe_wrapper'>
+        <ul className='event_wrapper'>
           {events.map((event) => (
             <li
               key={event.id}
@@ -170,14 +171,14 @@ const EventCrud = (props) => {
                 <h3 className="recipe_title">{event.eventName}</h3>
                 <p className='recipe-description'>{truncateDescription(event.description)}</p>
                 <a
-                  className="see-more"
+                  className="see-more-event"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleSeeMore(event);
                   }}
                   href={`#recipe-modal-${event.id}`}
                 >
-                  See event
+                  See Event
                 </a>
               </div>
             </li>

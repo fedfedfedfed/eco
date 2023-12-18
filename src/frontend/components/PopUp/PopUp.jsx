@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './popup.css';
 import './buttons.css';
-import '../RecipeCrud/RecipeCrud.css';
+import '../ProductCrud/ProductCrud.css';
 
 const ITEMS_PER_PAGE = 9;
 
@@ -38,40 +38,39 @@ const PopUp = ({ currentPage, handlePageChange }) => {
     
         const response = await axios.get('http://localhost:8080/api/recipes/search', { params });
     
-        setRecipes(response.data);
+        setProducts(response.data);
         console.log(response.data);
       } catch (error) {
-        console.error('Error searching recipes:', error);
+        console.error('Error searching products:', error);
       }
     };
     
     
     
-  const [recipes, setRecipes] = useState([]);
+  const [products, setProducts] = useState([]);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    cousine: '',
-    difficultyLevel: '',
-    imageUrl: '',
-    cookingTime: 0,
+      title: '',
+      description: '',
+      imageUrl: '',
+      price: 0.0,
+      isAvailable: false,
   });
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [containerStyle, setContainerStyle] = useState({
     backgroundColor: '',
   });
 
   useEffect(() => {
-    fetchRecipes();
+    fetchProducts();
   }, [currentPage]);
 
-  const fetchRecipes = async () => {
+  const fetchProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/recipes?page=${currentPage}&perPage=${ITEMS_PER_PAGE}`);
-      setRecipes(response.data);
+      const response = await axios.get(`http://localhost:8080/api/products?page=${currentPage}&perPage=${ITEMS_PER_PAGE}`);
+      setProducts(response.data);
     } catch (error) {
-      console.error('Error fetching recipes:', error);
+      console.error('Error fetching products:', error);
     }
   };
   
@@ -80,18 +79,18 @@ const PopUp = ({ currentPage, handlePageChange }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSeeMore = (recipe) => {
-    setSelectedRecipe(recipe);
+  const handleSeeMore = (product) => {
+    setSelectedProduct(product);
 
-    if (recipe.difficultyLevel === "EASY") {
+    if (product.difficultyLevel === "EASY") {
       setContainerStyle({ backgroundColor: "#51cf66" });
-    } else if (recipe.difficultyLevel === "INTERMEDIATE") {
+    } else if (product.difficultyLevel === "INTERMEDIATE") {
       setContainerStyle({ backgroundColor: "#ffd43b" });
     } else {
       setContainerStyle({ backgroundColor: "red" });
     }
 
-    setFormData(recipe);
+    setFormData(product);
     openModal();
   };
 
@@ -102,14 +101,13 @@ const PopUp = ({ currentPage, handlePageChange }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedRecipe(null);
+    setSelectedProduct(null);
     setFormData({
       title: '',
       description: '',
-      cousine: '',
-      difficultyLevel: '',
       imageUrl: '',
-      cookingTime: 0,
+      price: 0.0,
+      isAvailable: false,
     });
     document.body.classList.remove('modal-open'); 
   };
@@ -129,7 +127,7 @@ const PopUp = ({ currentPage, handlePageChange }) => {
         </div>
 
 
-        <div className="filters">
+        {/* <div className="filters">
       <div className="filter-item search">
         <label htmlFor="filter-search">Search</label>
         <input
@@ -204,60 +202,58 @@ const PopUp = ({ currentPage, handlePageChange }) => {
         <button type="button" onClick={handleResetFilters} className="reset_btn">
           Reset the filter
         </button>
-    </div>
+    </div> */}
 
 
 
-        <ul className='recipe_wrapper'>
-          {recipes.map((recipe) => (
-            <li
-              key={recipe.id}
-              className="recipe-card"
-            >
-              <div className="recipe-details">
-                <img src={recipe.imageUrl} alt={recipe.title} className="recipe-image" />
-                <h3 className="recipe_title">{recipe.title}</h3>
-                <p className='recipe-description'>{truncateDescription(recipe.description)}</p>
-                <a
-                  className="see-more"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSeeMore(recipe);
-                  }}
-                  href={`#recipe-modal-${recipe.id}`}
-                >
-                  See recipe
-                </a>
-              </div>
-            </li>
-          ))}
-        </ul>
+<ul className='product_wrapper'>
+        {products.map((product) => (
+          <li
+            key={product.id}
+            className="recipe-card"
+          >
+            <div className="recipe-details">
+              <img src={product.imageUrl} alt={product.title} className="recipe-image" />
+              <h3 className="product_title">{product.title}</h3>
+              <p className='product-description'>{truncateDescription(product.description)}</p>
+              <p className='product-price'>{product.price}$</p>
+              {product.isAvailable == true && <p>Present</p>}
+              <a
+                className="see-more-product"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSeeMore(product);
+                }}
+                href={`#recipe-modal-${product.id}`}
+              >
+                See Product
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
 
-       
-        {selectedRecipe && (
-          <div id={`recipe-modal-${selectedRecipe.id}`} className="modal">
+      {selectedProduct && (
+          <div id={`recipe-modal-${selectedProduct.id}`} className="modal">
             <div className="modal__content">
-              <h2 className='modal_title'>{selectedRecipe.title}</h2>
+              <h2 className='modal_title'>{selectedProduct.title}</h2>
               <img
-                src={selectedRecipe.imageUrl}
-                alt={selectedRecipe.title}
+                src={selectedProduct.imageUrl}
+                alt={selectedProduct.title}
                 className="modal-image"
               />
               <div className='modal_icon_wrapper'>
-                <p style={containerStyle} className="modal_difficulty" >{selectedRecipe.difficultyLevel}</p>
-                <div className='modal_icon_subwrapper'>
-                  <p className='modal_cousine'>#{selectedRecipe.cousine}</p>
-                  <p className='modal_cook_time'><i className="fas fa-clock clock-icon"></i>{selectedRecipe.cookingTime} min</p>
-                </div>
+                <p className="bold" >{selectedProduct.price}$</p>
+                
               </div>
-              <p className='modal_description'>{selectedRecipe.description}</p>
+              <p className='modal_description'>{selectedProduct.description}</p>
 
               <button className="modal__close" onClick={closeModal}>
                 &#10006;
               </button>
-            </div>
           </div>
-        )}
+        </div>
+      )}
 
         
       </div>

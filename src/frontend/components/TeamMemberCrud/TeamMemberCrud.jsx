@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import './ChefCrud.css';
+import './TeamMember.css';
 import Header from '../Header/Header';
 
-const ChefCrud = (props) => {
+const TeamMemberCrud = (props) => {
   
   const [chef, setChefs] = useState([]);
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    phone_number: '',
+    phoneNumber: '',
     experience: 0,
     biography: '',
-    image_url: '',
+    imageUrl: '',
   });
   const [selectedChef, setSelectedChef] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,10 +27,10 @@ const ChefCrud = (props) => {
 
   const fetchChefs = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/chefs');
+      const response = await axios.get('http://localhost:8080/api/team-members');
       setChefs(response.data);
     } catch (error) {
-      console.error('Error fetching chefs:', error);
+      console.error('Error fetching team members:', error);
     }
   };
 
@@ -42,19 +42,19 @@ const ChefCrud = (props) => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8080/api/chefs', formData);
+      await axios.post('http://localhost:8080/api/team-members', formData);
       fetchChefs();
       setFormData({
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
-        phone_number: '',
+        phoneNumber: '',
         experience: 0,
         biography: '',
-        image_url: '',
+        imageUrl: '',
       });
     } catch (error) {
-      console.error('Error creating chef:', error);
+      console.error('Error creating team member:', error);
     }
   };
 
@@ -68,25 +68,25 @@ const ChefCrud = (props) => {
       };
 
       await axios.put(
-        `http://localhost:8080/api/chefs/${selectedChef.id}`,
+        `http://localhost:8080/api/team-members/${selectedChef.id}`,
         updatedChef
       );
 
       fetchChefs();
       closeModal();
     } catch (error) {
-      console.error('Error updating chef:', error);
+      console.error('Error updating team member:', error);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/chefs/${id}`);
+      await axios.delete(`http://localhost:8080/api/team-members/${id}`);
       fetchChefs();
       setSelectedChef(null);
       closeModal();
     } catch (error) {
-      console.error('Error deleting chef:', error);
+      console.error('Error deleting team member:', error);
     }
   };
 
@@ -105,13 +105,13 @@ const ChefCrud = (props) => {
     setIsModalOpen(false);
     setSelectedChef(null);
     setFormData({
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: '',
-      phone_number: '',
+      phoneNumber: '',
       experience: 0,
       biography: '',
-      image_url: '',
+      imageUrl: '',
     });
     document.body.classList.remove('modal-open');
   };
@@ -129,12 +129,13 @@ return (
       <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
         <div className="header_wrapper">
-          <div>
-            <h1 className='recipes-title'>Chefs</h1>
-          </div>
-          <Link to="/manage-chefs/add-chefs" className="add">
+        <Link to="/manage-team-members/add-team-members" className="add">
             <span>+</span>
           </Link>
+          <div>
+            <h1 className='recipes-title'>Team Members</h1>
+          </div>
+          
   
           <div id="open-modal" className="modal-window">
             <div>
@@ -148,28 +149,28 @@ return (
                     type="text"
                     id="first_name"
                     name="first_name"
-                    value={formData.first_name}
+                    value={formData.firstName}
                     onChange={handleInputChange}
                     required
                   />
                 </div>
                
-                <button type="submit">Add Chef</button>
+                <button type="submit">Add Team Member</button>
               </form>
             </div>
           </div>
         </div>
   
-        <ul className='recipe_wrapper'>
+        <ul className='team_wrapper'>
         {chef.map((chefx) => (
-          <li key={chefx.id} className="recipe-card">
+          <li key={chefx.id} className="team-card">
             <div className="recipe-details">
             <img src={chefx.imageUrl} alt={chefx.title} className="recipe-image" />
-              <h3 className="recipe_title chef_title">
+              <h3 className="team_title">
                 {chefx.firstName} {chefx.lastName}
               </h3>
-              <p className='chef_email'><i className="far fa-envelope"></i> <span>{chefx.email}</span></p>
-              <p className='recipe-description'>{truncateDescription(chefx.biography)}</p>
+              <p className='team_email'><i className="far fa-envelope"></i> <span>{chefx.email}</span></p>
+              <p className='team_description'>{truncateDescription(chefx.biography)}</p>
               <a
                 className="see-more"
                 onClick={(e) => {
@@ -192,11 +193,11 @@ return (
         &#10006;
       </button>
       <div className="chef-details">
-        <h2 className='modal_title'>{selectedChef.firstName} {selectedChef.lastName}</h2>
+        <h2 className='modal_title_team'>{selectedChef.firstName} {selectedChef.lastName}</h2>
         <img
           src={selectedChef.imageUrl}
           alt={`${selectedChef.firstName} ${selectedChef.lastName}`}
-          className="modal-image"
+          className="modal-image-team"
         />
 
         <div className='chef-info'>
@@ -205,11 +206,11 @@ return (
           <p><i className="fas fa-phone"></i> {selectedChef.phoneNumber}</p>
           </div>
           <p>{selectedChef.biography}</p>
-          <p className='chef_exp'><i className="fas fa-clock"></i> {selectedChef.experience} years</p>
+          <p className='team_years'><i className="fas fa-birthday-cake"></i> {selectedChef.experience} years</p>
           </div>
 
         <div className="crud_btns">
-          <Link to={`/manage-chefs/update-chefs/${selectedChef.id}`} className="update">
+          <Link to={`/manage-team-members/update-team-members/${selectedChef.id}`} className="update">
               <button type="button" className='update-btn' onClick={handleUpdate}>
                 Update
               </button>
@@ -230,4 +231,4 @@ return (
         }
   
 
-export default ChefCrud;
+export default TeamMemberCrud;

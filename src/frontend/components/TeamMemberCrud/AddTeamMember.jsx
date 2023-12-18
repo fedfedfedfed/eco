@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-import './ChefCrud.css';
+import './TeamMember.css';
 
-const AddChef = (props) => {
+const AddTeamMember = (props) => {
     const navigate = useNavigate();
   
     const [formData, setFormData] = useState({
@@ -34,8 +34,8 @@ const AddChef = (props) => {
   
       if (validateInput()) {
         try {
-          await axios.post('http://localhost:8080/api/chefs', formData);
-          navigate('/manage-chefs'); // Redirect to the chefs page after adding a chef
+          await axios.post('http://localhost:8080/api/team-members', formData);
+          navigate('/manage-team-members'); // Redirect to the chefs page after adding a chef
         } catch (error) {
           console.error('Error creating chef:', error);
         }
@@ -90,7 +90,7 @@ const AddChef = (props) => {
     <div className="wrapper">
       <Header userRole={props.userRole} setUserRole={props.setUserRole}/>
       <div className="recipe-container">
-        <h2 className='recipes-title'>Add Chef</h2>
+        <h2 className='recipes-title'>Add Team Member</h2>
         <div className="form-container">
           <form className="recipe-form" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -165,7 +165,7 @@ const AddChef = (props) => {
             <div className="error-message">{validationErrors.phoneNumber}</div>
           )}
             <div className="form-group">
-              <label htmlFor="experience">Experience:</label>
+              <label htmlFor="experience">Age:</label>
               <input
                 type="number"
                 id="experience"
@@ -173,7 +173,8 @@ const AddChef = (props) => {
                 value={formData.experience}
                 onChange={handleInputChange}
                 required
-                min="0"
+                min={18}
+                max={60}
               />
             </div>
             {validationErrors.experience && (
@@ -190,7 +191,7 @@ const AddChef = (props) => {
               />
             </div>
 
-            <button className='add_btn' type="submit">Add Chef</button>
+            <button className='add_btn' type="submit">Add Team Member</button>
           </form>
         </div>
       </div>
@@ -198,4 +199,4 @@ const AddChef = (props) => {
   );
 };
 
-export default AddChef;
+export default AddTeamMember;
